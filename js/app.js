@@ -387,9 +387,9 @@ function prevVocabRef(catIdx, wordIdx) {
 }
 
 function renderVocabCategory(slug) {
+  const catIdx = state.vocabCategories.findIndex(c => c.slug === slug);
+  const cat = state.vocabCategories[catIdx];
   pushView(() => {
-    const catIdx = state.vocabCategories.findIndex(c => c.slug === slug);
-    const cat = state.vocabCategories[catIdx];
     const prevCat = catIdx > 0 ? state.vocabCategories[catIdx - 1] : null;
     const nextCat = catIdx < state.vocabCategories.length - 1 ? state.vocabCategories[catIdx + 1] : null;
     const navRow = `

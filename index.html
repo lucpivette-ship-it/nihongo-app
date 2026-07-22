@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nihongo — Japanese Study</title>
+<meta name="theme-color" content="#b3282d">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Nihongo">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header id="app-header">
+  <button id="back-btn" class="icon-btn" aria-label="Back" hidden>←</button>
+  <h1 id="header-title">Nihongo</h1>
+  <span id="header-sub"></span>
+</header>
+
+<main id="app-main"></main>
+
+<nav id="bottom-nav">
+  <button data-view="home" class="nav-btn active">🏠<span>Home</span></button>
+  <button data-view="kanji" class="nav-btn">漢<span>Kanji</span></button>
+  <button data-view="vocab" class="nav-btn">語<span>Vocab</span></button>
+  <button data-view="grammar" class="nav-btn">文<span>Grammar</span></button>
+  <button data-view="readings" class="nav-btn">読<span>Readings</span></button>
+  <button data-view="other" class="nav-btn">他<span>Other</span></button>
+</nav>
+
+<script src="js/markdown.js"></script>
+<script src="js/tts.js"></script>
+<script src="js/trace.js"></script>
+<script src="js/quiz.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

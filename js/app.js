@@ -186,7 +186,7 @@ function renderHome() {
     main.innerHTML = `
       <p style="color:var(--muted);margin-top:0">Goal: JLPT N3 → N2 → N1</p>
       <div class="tile-grid">
-        <div class="tile" data-go="kanji"><span class="glyph">漢字</span><span class="label">Kanji</span><span class="sub">Grades 1–3 · 440</span></div>
+        <div class="tile" data-go="kanji"><span class="glyph">漢字</span><span class="label">Kanji</span><span class="sub">Grades 1–4 · 642</span></div>
         <div class="tile" data-go="vocab"><span class="glyph">語彙</span><span class="label">Vocabulary</span><span class="sub">Daily life & business</span></div>
         <div class="tile" data-go="grammar"><span class="glyph">文法</span><span class="label">Grammar</span><span class="sub">N5–N3 points</span></div>
         <div class="tile" data-go="readings"><span class="glyph">読解</span><span class="label">Readings</span><span class="sub">Short passages</span></div>
@@ -201,8 +201,8 @@ function renderHome() {
 
 // ---------- Kanji ----------
 
-const BUILT_KANJI_GRADES = [1, 2, 3]; // grades with content available so far
-const GRADE_KANJI_COUNTS = { 1: 80, 2: 160, 3: 200, 4: 200, 5: 185, 6: 181 };
+const BUILT_KANJI_GRADES = [1, 2, 3, 4]; // grades with content available so far
+const GRADE_KANJI_COUNTS = { 1: 80, 2: 160, 3: 200, 4: 202, 5: 185, 6: 181 };
 const GRADE_JLPT = { 1: 'N5', 2: 'N4', 3: 'N4', 4: 'N3', 5: 'N3', 6: 'N3' };
 
 function renderKanjiHome() {

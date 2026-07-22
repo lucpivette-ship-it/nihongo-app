@@ -3,7 +3,7 @@
 // notes show up after the next reconnect instead of being stuck until reinstall.
 // Bump CACHE_NAME on every app-shell code change to force clients to re-cache.
 
-const CACHE_NAME = 'nihongo-v2';
+const CACHE_NAME = 'nihongo-v3';
 const CONTENT_INDEX_URL = 'content/index.md';
 
 const APP_SHELL = [
@@ -14,10 +14,17 @@ const APP_SHELL = [
   'js/markdown.js',
   'js/tts.js',
   'js/trace.js',
+  'js/stroke-order.js',
   'js/quiz.js',
   'js/app.js',
   'icons/icon.svg',
   CONTENT_INDEX_URL,
+];
+
+// Third-party CDN assets (stroke-order library) — cached best-effort so a
+// flaky/offline CDN at install time never breaks caching of the core app.
+const CDN_ASSETS = [
+  'https://cdn.jsdelivr.net/npm/hanzi-writer@3/dist/hanzi-writer.min.js',
 ];
 
 self.addEventListener('install', (event) => {
@@ -25,6 +32,11 @@ self.addEventListener('install', (event) => {
     (async () => {
       const cache = await caches.open(CACHE_NAME);
       await cache.addAll(APP_SHELL);
+      try {
+        await cache.addAll(CDN_ASSETS);
+      } catch (e) {
+        console.error('Could not pre-cache CDN assets', e);
+      }
       try {
         const res = await fetch(CONTENT_INDEX_URL);
         const text = await res.text();

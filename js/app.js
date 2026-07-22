@@ -186,7 +186,7 @@ function renderHome() {
     main.innerHTML = `
       <p style="color:var(--muted);margin-top:0">Goal: JLPT N3 → N2 → N1</p>
       <div class="tile-grid">
-        <div class="tile" data-go="kanji"><span class="glyph">漢字</span><span class="label">Kanji</span><span class="sub">Grade 1 · 80</span></div>
+        <div class="tile" data-go="kanji"><span class="glyph">漢字</span><span class="label">Kanji</span><span class="sub">Grades 1–2 · 240</span></div>
         <div class="tile" data-go="vocab"><span class="glyph">語彙</span><span class="label">Vocabulary</span><span class="sub">Daily life & business</span></div>
         <div class="tile" data-go="grammar"><span class="glyph">文法</span><span class="label">Grammar</span><span class="sub">N5–N3 points</span></div>
         <div class="tile" data-go="readings"><span class="glyph">読解</span><span class="label">Readings</span><span class="sub">Short passages</span></div>
@@ -201,24 +201,28 @@ function renderHome() {
 
 // ---------- Kanji ----------
 
+const BUILT_KANJI_GRADES = [1, 2]; // grades with content available so far
+const GRADE_KANJI_COUNTS = { 1: 80, 2: 160, 3: 200, 4: 200, 5: 185, 6: 181 };
+const GRADE_JLPT = { 1: 'N5', 2: 'N4', 3: 'N4', 4: 'N3', 5: 'N3', 6: 'N3' };
+
 function renderKanjiHome() {
   pushView(async () => {
     main.innerHTML = '<p>Loading…</p>';
-    await loadKanjiGrade(1);
+    for (const g of BUILT_KANJI_GRADES) await loadKanjiGrade(g);
     main.innerHTML = `
       <div class="section-title">Elementary grades</div>
-      <div class="card" id="grade-1">Grade 1 — 80 kanji ${jlptBadge('N5')}</div>
-      <div class="card coming-soon">Grade 2 — coming soon</div>
-      <div class="card coming-soon">Grade 3 — coming soon</div>
-      <div class="card coming-soon">Grade 4 — coming soon</div>
-      <div class="card coming-soon">Grade 5 — coming soon</div>
-      <div class="card coming-soon">Grade 6 — coming soon</div>
+      ${[1, 2, 3, 4, 5, 6].map(g => {
+        const built = BUILT_KANJI_GRADES.includes(g);
+        return built
+          ? `<div class="card" data-grade="${g}">Grade ${g} — ${GRADE_KANJI_COUNTS[g]} kanji ${jlptBadge(GRADE_JLPT[g])}</div>`
+          : `<div class="card coming-soon">Grade ${g} — coming soon</div>`;
+      }).join('')}
     `;
-    document.getElementById('grade-1').addEventListener('click', () => renderGroupList(1));
+    main.querySelectorAll('[data-grade]').forEach(el => {
+      el.addEventListener('click', () => renderGroupList(Number(el.dataset.grade)));
+    });
   }, 'Kanji', 'Grades 1–6');
 }
-
-const BUILT_KANJI_GRADES = [1]; // grades with content available so far
 
 function renderGroupList(grade) {
   pushView(() => {

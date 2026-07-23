@@ -13,7 +13,7 @@ const state = {
 };
 
 async function fetchText(path) {
-  const res = await fetch(path);
+  const res = await fetch(path, { cache: 'no-store' });
   if (!res.ok) throw new Error('Failed to fetch ' + path);
   return res.text();
 }

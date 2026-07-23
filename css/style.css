@@ -88,6 +88,12 @@ html, body {
 
 .kanji-detail { text-align: center; }
 .kanji-glyph-big { font-size: 96px; line-height: 1; margin: 6px 0; }
+.kanji-top-row {
+  display: flex; align-items: center; justify-content: center;
+  gap: 18px; flex-wrap: wrap; margin: 4px 0 2px;
+}
+.kanji-top-row .kanji-glyph-big { font-size: 76px; margin: 0; }
+.kanji-top-row .stroke-order-panel { margin: 0; }
 .kanji-meaning { font-size: 16px; color: var(--muted); margin-bottom: 10px; }
 .readings-row { display: flex; justify-content: center; gap: 22px; margin: 10px 0 16px; text-align: left; }
 .readings-row div { }

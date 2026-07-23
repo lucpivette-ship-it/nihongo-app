@@ -1268,6 +1268,7 @@ Master list of content files (used by app.js and service-worker.js).
 - vocab/greetings-basics.md
 - vocab/health.md
 - vocab/index.md
+- vocab/numbers-counting.md
 - vocab/question-pronouns.md
 - vocab/shopping-money.md
 - vocab/technology-communication.md

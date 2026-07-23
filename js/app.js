@@ -311,7 +311,10 @@ function renderKanjiDetail(grade, kanjiChar) {
           <span class="nav-pos">${idx + 1} / ${flat.length}</span>
           <button class="nav-arrow" id="next-kanji-btn" ${nextK ? '' : 'disabled'}>${nextK ? nextK.kanji + ' ›' : '›'}</button>
         </div>
-        <div class="kanji-glyph-big">${k.kanji}</div>
+        <div class="kanji-top-row">
+          <div class="kanji-glyph-big">${k.kanji}</div>
+          <div class="kanji-stroke-inline" id="kanji-stroke-anim"></div>
+        </div>
         <div class="kanji-meaning">${k.meaning} ${jlptBadge(k.jlpt)}</div>
         <div class="readings-row">
           <div><div class="rlabel">Strokes</div><div class="rval">${k.strokes}</div></div>
@@ -324,23 +327,19 @@ function renderKanjiDetail(grade, kanjiChar) {
           <div class="en">${k.sentence.en}</div>
         </div>
         <div class="btn-row">
-          <button class="btn secondary" id="stroke-order-btn">▶ Stroke order</button>
           <button class="btn secondary" id="practice-btn">✍️ Practice writing</button>
           <button class="btn" id="quiz-btn">Quiz me on this kanji</button>
         </div>
         <div id="kanji-extra"></div>
       </div>
     `;
+    mountStrokeOrder(document.getElementById('kanji-stroke-anim'), k.kanji, { size: 150 });
     if (prevK) {
       document.getElementById('prev-kanji-btn').addEventListener('click', () => replaceView(() => renderKanjiDetail(grade, prevK.kanji)));
     }
     if (nextK) {
       document.getElementById('next-kanji-btn').addEventListener('click', () => replaceView(() => renderKanjiDetail(grade, nextK.kanji)));
     }
-    document.getElementById('stroke-order-btn').addEventListener('click', () => {
-      const extra = document.getElementById('kanji-extra');
-      mountStrokeOrder(extra, k.kanji);
-    });
     document.getElementById('practice-btn').addEventListener('click', () => {
       const extra = document.getElementById('kanji-extra');
       mountTracePad(extra, k.kanji);

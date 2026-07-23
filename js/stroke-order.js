@@ -11,10 +11,11 @@
 
 const STROKE_DATA_BASE = 'https://cdn.jsdelivr.net/npm/hanzi-writer-data@latest/';
 
-function mountStrokeOrder(container, kanjiChar) {
+function mountStrokeOrder(container, kanjiChar, opts = {}) {
+  const size = opts.size || 220;
   container.innerHTML = `
     <div class="stroke-order-panel">
-      <div id="stroke-target" class="stroke-target"></div>
+      <div id="stroke-target" class="stroke-target" style="width:${size}px;height:${size}px;"></div>
       <div class="btn-row">
         <button class="btn secondary" id="stroke-replay-btn">↻ Replay</button>
       </div>
@@ -30,8 +31,8 @@ function mountStrokeOrder(container, kanjiChar) {
   let writer;
   try {
     writer = HanziWriter.create('stroke-target', kanjiChar, {
-      width: 220,
-      height: 220,
+      width: size,
+      height: size,
       padding: 12,
       strokeColor: '#b3282d',
       radicalColor: '#b3282d',

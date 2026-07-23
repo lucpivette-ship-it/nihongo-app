@@ -18,5 +18,13 @@ tags: [vocab, daily-life]
 | 在庫 | zaiko | stock / inventory | #N3 | この商品は在庫があります。 *(This item is in stock.)* |
 | 試着 | shichaku | trying on clothes | #N3 | 試着してもいいですか。 *(May I try this on?)* |
 | セール | seeru | sale | #N5 | セールはいつまでですか。 *(Until when is the sale?)* |
+| 売る | uru | to sell | #N5 | この店は花を売っています。 *(This shop sells flowers.)* |
+| 円 | en | Yen | #N5 | これは千円です。 *(This is one thousand yen.)* |
+| 買物 | kaimono | shopping | #N5 | 週末に買い物をします。 *(I'll go shopping on the weekend.)* |
+| 買う | kau | to buy | #N5 | 新しい靴を買いました。 *(I bought new shoes.)* |
+| 切手 | kitte | stamp | #N5 | 切手を五枚ください。 *(Five stamps, please.)* |
+| デパート | depaato | department store | #N5 | デパートで服を買いました。 *(I bought clothes at the department store.)* |
+| 店 | mise | shop | #N5 | この店は安いです。 *(This shop is cheap.)* |
+| 〜屋 | ~ya | shop, store | #N5 | パン屋でパンを買います。 *(I buy bread at the bakery.)* |
 
 #vocab #daily-life

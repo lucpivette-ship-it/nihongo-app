@@ -21,5 +21,14 @@ tags: [vocab, daily-life]
 | ごちそうさまでした | gochisousama deshita | said after eating | #N5 | ごちそうさまでした、おいしかったです。 *(Thank you for the meal, it was delicious.)* |
 | 大丈夫です | daijoubu desu | it's okay / I'm fine | #N5 | 心配しないで、大丈夫です。 *(Don't worry, I'm fine.)* |
 | お元気ですか | ogenki desu ka | how are you | #N5 | お元気ですか、久しぶりですね。 *(How are you? It's been a while.)* |
+| あの | ano | um, well | #N5 | あの、すみません。 *(Um, excuse me.)* |
+| ええ | ee | yes, I see | #N5 | ええ、そうです。 *(Yes, that's right.)* |
+| 御 | o | honorific prefix | #N5 | お名前は何ですか。 *(What is your name?)* |
+| さあ | saa | well… | #N5 | さあ、行きましょう。 *(Well then, let's go.)* |
+| じゃ | ja | well then | #N5 | じゃ、また明日。 *(Well then, see you tomorrow.)* |
+| それでは | soredewa | well then | #N5 | それでは、始めましょう。 *(Well then, let's begin.)* |
+| では | dewa | well then | #N5 | では、失礼します。 *(Well then, excuse me (goodbye).)* |
+| どうも | doumo | thanks | #N5 | どうも、ありがとう。 *(Thanks so much.)* |
+| 〜など | ~nado | and so on | #N4 | りんごやバナナなどが好きです。 *(I like apples, bananas, and so on.)* |
 
 #vocab #daily-life

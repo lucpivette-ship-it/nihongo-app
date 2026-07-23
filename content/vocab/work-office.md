@@ -21,5 +21,9 @@ tags: [vocab, business]
 | 在宅勤務 | zaitaku kinmu | remote work / work from home | #N2 | 今日は在宅勤務です。 *(I'm working from home today.)* |
 | 有給休暇 | yuukyuu kyuuka | paid leave | #N2 | 有給休暇を取りました。 *(I took paid leave.)* |
 | 昇進 | shoushin | promotion | #N2 | 彼は昇進しました。 *(He got promoted.)* |
+| 銀行 | ginkou | bank | #N5 | 銀行でお金を換えます。 *(I'll exchange money at the bank.)* |
+| 住む | sumu | to live, to reside somewhere | #N5 | 東京に住んでいます。 *(I live in Tokyo.)* |
+| 大使館 | taishikan | embassy | #N4 | 大使館でビザを申請します。 *(I'll apply for a visa at the embassy.)* |
+| 働く | hataraku | to work | #N5 | 銀行で働いています。 *(I work at a bank.)* |
 
 #vocab #business

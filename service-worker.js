@@ -3,7 +3,7 @@
 // notes show up after the next reconnect instead of being stuck until reinstall.
 // Bump CACHE_NAME on every app-shell code change to force clients to re-cache.
 
-const CACHE_NAME = 'nihongo-v9';
+const CACHE_NAME = 'nihongo-v10';
 const CONTENT_INDEX_URL = 'content/index.md';
 
 const APP_SHELL = [

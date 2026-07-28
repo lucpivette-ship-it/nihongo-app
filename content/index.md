@@ -1302,6 +1302,7 @@ Master list of content files (used by app.js and service-worker.js).
 - vocab/clothing.md
 - vocab/colors-shapes.md
 - vocab/descriptive-words.md
+- vocab/descriptive-words-2.md
 - vocab/entertainment-hobbies.md
 - vocab/family-people.md
 - vocab/food-dining.md
@@ -1309,6 +1310,7 @@ Master list of content files (used by app.js and service-worker.js).
 - vocab/health.md
 - vocab/household-objects.md
 - vocab/index.md
+- vocab/n4-essentials.md
 - vocab/numbers-counting.md
 - vocab/other-essentials.md
 - vocab/places-directions.md
@@ -1319,5 +1321,6 @@ Master list of content files (used by app.js and service-worker.js).
 - vocab/time-schedule.md
 - vocab/transportation.md
 - vocab/verbs-actions.md
+- vocab/verbs-actions-2.md
 - vocab/weather-nature.md
 - vocab/work-office.md

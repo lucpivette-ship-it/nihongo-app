@@ -29,15 +29,42 @@ async function loadFileList() {
   state.fileList = lines.map(l => l.slice(2).trim());
 }
 
+// Parses one or more example blocks from a kanji note body. Supports two
+// formats: the original single-example format used by the 1,026 elementary
+// kanji ("## Example sentence" with one JP/Reading/EN triple), and the
+// per-reading format used from N3 onward ("## Example: On-yomi (sei)" /
+// "## Example: Kun-yomi (matsurigoto)", one block per on'yomi/kun'yomi
+// reading — see PROJECT_LOG "kanji reading examples" note). Both formats
+// produce the same `examples` array shape so the renderer doesn't need to
+// know which format a given note used.
+function parseKanjiExamples(body) {
+  const sections = body.split(/\n(?=##\s)/);
+  const examples = [];
+  sections.forEach(sec => {
+    const headingMatch = sec.match(/^##\s*Example(?:\s*:\s*(On-yomi|Kun-yomi)\s*\(([^)]*)\))?/i);
+    if (!headingMatch) return;
+    const jpMatch = sec.match(/\*\*JP:\*\*\s*(.+)/);
+    if (!jpMatch) return;
+    const readingMatch = sec.match(/\*\*Reading:\*\*\s*(.+)/);
+    const enMatch = sec.match(/\*\*EN:\*\*\s*(.+)/);
+    examples.push({
+      type: headingMatch[1] ? headingMatch[1].replace('-yomi', '').toLowerCase() : '', // 'on' | 'kun' | ''
+      reading: headingMatch[2] || '',
+      jp: jpMatch[1].trim(),
+      reading_text: readingMatch ? readingMatch[1].trim() : '',
+      en: enMatch ? enMatch[1].trim() : ''
+    });
+  });
+  return examples;
+}
+
 async function loadKanjiGrade(grade) {
   if (state.kanjiByGrade[grade]) return state.kanjiByGrade[grade];
   const files = state.fileList.filter(f => new RegExp(`^kanji/grade${grade}/\\d+-.+\\.md$`).test(f));
   const items = await Promise.all(files.map(async (f) => {
     const text = await fetchText(CONTENT + f);
     const { data, body } = parseFrontmatter(text);
-    const jpMatch = body.match(/\*\*JP:\*\*\s*(.+)/);
-    const readingMatch = body.match(/\*\*Reading:\*\*\s*(.+)/);
-    const enMatch = body.match(/\*\*EN:\*\*\s*(.+)/);
+    const examples = parseKanjiExamples(body);
     const orderMatch = f.match(/\/(\d+)-[^/]+\.md$/);
     return {
       kanji: data.kanji,
@@ -49,11 +76,10 @@ async function loadKanjiGrade(grade) {
       jlpt: data.jlpt,
       group: data.group,
       order: orderMatch ? parseInt(orderMatch[1], 10) : 0,
-      sentence: {
-        jp: jpMatch ? jpMatch[1].trim() : '',
-        reading: readingMatch ? readingMatch[1].trim() : '',
-        en: enMatch ? enMatch[1].trim() : ''
-      }
+      examples,
+      // Backward-compat single-sentence accessor: quiz.js and older code
+      // just want "a" sentence, so give it the first example.
+      sentence: examples[0] || { jp: '', reading: '', en: '' }
     };
   }));
   items.sort((a, b) => a.order - b.order);
@@ -186,7 +212,7 @@ function renderHome() {
     main.innerHTML = `
       <p style="color:var(--muted);margin-top:0">Goal: JLPT N3 → N2 → N1</p>
       <div class="tile-grid">
-        <div class="tile" data-go="kanji"><span class="glyph">漢字</span><span class="label">Kanji</span><span class="sub">Grades 1–6 · 1026</span></div>
+        <div class="tile" data-go="kanji"><span class="glyph">漢字</span><span class="label">Kanji</span><span class="sub">1,026 elementary + remaining jōyō in progress</span></div>
         <div class="tile" data-go="vocab"><span class="glyph">語彙</span><span class="label">Vocabulary</span><span class="sub">Daily life & business</span></div>
         <div class="tile" data-go="grammar"><span class="glyph">文法</span><span class="label">Grammar</span><span class="sub">N5–N3 points</span></div>
         <div class="tile" data-go="readings"><span class="glyph">読解</span><span class="label">Readings</span><span class="sub">Short passages</span></div>
@@ -201,9 +227,47 @@ function renderHome() {
 
 // ---------- Kanji ----------
 
-const BUILT_KANJI_GRADES = [1, 2, 3, 4, 5, 6]; // grades with content available so far
-const GRADE_KANJI_COUNTS = { 1: 80, 2: 160, 3: 200, 4: 202, 5: 193, 6: 191 };
-const GRADE_JLPT = { 1: 'N5', 2: 'N4', 3: 'N4', 4: 'N3', 5: 'N3', 6: 'N2' };
+// Grades 1-6 are the MEXT elementary kyoiku kanji. Grades 7-9 are a
+// repurposing of the same "grade" plumbing to carry the remaining jouyou
+// kanji (the ones NOT taught in elementary school).
+//
+// Note (2026-07-28): the original plan was to source these tier-by-tier
+// from jlptsensei's per-level N3/N2/N1 kanji lists. That backfired — a
+// dedup check showed jlptsensei's "N3" list of 370 kanji overlaps the
+// existing 1,026 elementary kanji by 320 (86%), because JLPT level and
+// school grade are independent classifications; a kanji can be taught in
+// grade 4 and still be legitimately "N3 material" for exam purposes. So
+// per-JLPT-level lists are a bad source for "what's left to build."
+//
+// Fixed by switching to KANJIDIC2's grade classification (via kanjiapi.dev):
+// grade 8 = jouyou kanji taught in secondary school, i.e. exactly "every
+// jouyou kanji not in the elementary 1,026" (1,134 kanji, only 20 overlap
+// with elementary -- the 47 prefecture-name kanji, which MEXT teaches in
+// grade 4 as a special exception -- leaving 1,114 genuinely new kanji).
+// That 1,114-kanji pool is what grades 7/8/9 are built from now, in
+// KANJIDIC's canonical (radical/stroke) order, split into three batches.
+//
+// Because this pool isn't JLPT-level-exclusive, individual kanji are
+// tagged with their own true jlpt value (kanjiapi's per-character field,
+// old 4-level scale 1=hardest..4=easiest, mapped 3->N3, 2->N2, 1 or
+// null->N1) rather than assuming every kanji in a tier is the same level --
+// see GRADE_LABEL below, which no longer claims a single JLPT level per
+// tier.
+const ELEMENTARY_GRADES = [1, 2, 3, 4, 5, 6];
+const TIER_GRADES = [7, 8, 9];
+const ALL_KANJI_GRADES = ELEMENTARY_GRADES.concat(TIER_GRADES);
+const BUILT_KANJI_GRADES = [1, 2, 3, 4, 5, 6, 7]; // grades with content available so far
+const GRADE_KANJI_COUNTS = { 1: 80, 2: 160, 3: 200, 4: 202, 5: 193, 6: 191 }; // final counts for finished grades; tiers use live counts instead (see kanjiCountLabel)
+const GRADE_KANJI_TARGET = { 7: 371, 8: 371, 9: 372 }; // ~1,114 remaining jouyou kanji split into three batches
+const GRADE_JLPT = { 1: 'N5', 2: 'N4', 3: 'N4', 4: 'N3', 5: 'N3', 6: 'N2' }; // tiers 7-9 intentionally omitted: each kanji carries its own true jlpt tag instead (see note above)
+const GRADE_LABEL = { 1: 'Grade 1', 2: 'Grade 2', 3: 'Grade 3', 4: 'Grade 4', 5: 'Grade 5', 6: 'Grade 6', 7: 'Remaining kanji (1)', 8: 'Remaining kanji (2)', 9: 'Remaining kanji (3)' };
+const GRADE_TAB_LABEL = { 1: 'G1', 2: 'G2', 3: 'G3', 4: 'G4', 5: 'G5', 6: 'G6', 7: 'R1', 8: 'R2', 9: 'R3' };
+
+function kanjiCountLabel(g) {
+  const loaded = state.kanjiByGrade[g] ? state.kanjiByGrade[g].length : GRADE_KANJI_COUNTS[g];
+  const target = GRADE_KANJI_TARGET[g];
+  return (target && loaded !== target) ? `${loaded} of ${target} kanji` : `${loaded} kanji`;
+}
 
 function renderKanjiHome() {
   pushView(async () => {
@@ -211,26 +275,33 @@ function renderKanjiHome() {
     await Promise.all(BUILT_KANJI_GRADES.map(g => loadKanjiGrade(g)));
     main.innerHTML = `
       <div class="section-title">Elementary grades</div>
-      ${[1, 2, 3, 4, 5, 6].map(g => {
+      ${ELEMENTARY_GRADES.map(g => {
         const built = BUILT_KANJI_GRADES.includes(g);
         return built
-          ? `<div class="card" data-grade="${g}">Grade ${g} — ${GRADE_KANJI_COUNTS[g]} kanji ${jlptBadge(GRADE_JLPT[g])}</div>`
-          : `<div class="card coming-soon">Grade ${g} — coming soon</div>`;
+          ? `<div class="card" data-grade="${g}">${GRADE_LABEL[g]} — ${kanjiCountLabel(g)} ${jlptBadge(GRADE_JLPT[g])}</div>`
+          : `<div class="card coming-soon">${GRADE_LABEL[g]} — coming soon</div>`;
+      }).join('')}
+      <div class="section-title">Remaining jōyō kanji</div>
+      ${TIER_GRADES.map(g => {
+        const built = BUILT_KANJI_GRADES.includes(g);
+        return built
+          ? `<div class="card" data-grade="${g}">${GRADE_LABEL[g]} — ${kanjiCountLabel(g)}</div>`
+          : `<div class="card coming-soon">${GRADE_LABEL[g]} — coming soon</div>`;
       }).join('')}
     `;
     main.querySelectorAll('[data-grade]').forEach(el => {
       el.addEventListener('click', () => renderGroupList(Number(el.dataset.grade)));
     });
-  }, 'Kanji', 'Grades 1–6');
+  }, 'Kanji', 'Grades 1–6 & remaining jōyō kanji');
 }
 
 function renderGroupList(grade) {
   pushView(() => {
     const groups = state.groupsByGrade[grade];
     const groupNums = Object.keys(groups).map(Number).sort((a, b) => a - b);
-    const gradeTabs = [1, 2, 3, 4, 5, 6].map(g => {
+    const gradeTabs = ALL_KANJI_GRADES.map(g => {
       const built = BUILT_KANJI_GRADES.includes(g);
-      return `<button class="grade-tab ${g === grade ? 'active' : ''}" data-grade="${g}" ${built ? '' : 'disabled'}>G${g}</button>`;
+      return `<button class="grade-tab ${g === grade ? 'active' : ''}" data-grade="${g}" ${built ? '' : 'disabled'}>${GRADE_TAB_LABEL[g]}</button>`;
     }).join('');
     main.innerHTML = `
       <div class="grade-tabs">${gradeTabs}</div>
@@ -252,7 +323,7 @@ function renderGroupList(grade) {
         replaceView(() => renderGroupList(g));
       });
     });
-  }, `Grade ${grade} Kanji`, `${Object.keys(state.groupsByGrade[grade]).length} groups of 5`);
+  }, `${GRADE_LABEL[grade]} Kanji`, `${Object.keys(state.groupsByGrade[grade]).length} groups of 5`);
 }
 
 function renderGroupDetail(grade, groupNum) {
@@ -294,7 +365,7 @@ function renderGroupDetail(grade, groupNum) {
         document.getElementById('retry-quiz').addEventListener('click', () => document.getElementById('quiz-group-btn').click());
       });
     });
-  }, `Group ${String(groupNum).padStart(2, '0')}`, `Grade ${grade}`);
+  }, `Group ${String(groupNum).padStart(2, '0')}`, GRADE_LABEL[grade]);
 }
 
 function renderKanjiDetail(grade, kanjiChar) {
@@ -321,11 +392,13 @@ function renderKanjiDetail(grade, kanjiChar) {
           <div><div class="rlabel">On-yomi</div><div class="rval">${k.onyomi.join('、') || '—'}</div></div>
           <div><div class="rlabel">Kun-yomi</div><div class="rval">${k.kunyomi.join('、') || '—'}</div></div>
         </div>
+        ${(k.examples && k.examples.length ? k.examples : [k.sentence]).map(ex => `
         <div class="sentence-block">
-          <div class="jp">${k.sentence.jp} ${TTS.buttons(k.sentence.jp)}</div>
-          <div class="reading">${k.sentence.reading}</div>
-          <div class="en">${k.sentence.en}</div>
-        </div>
+          ${ex.type ? `<div class="example-label">${ex.type === 'on' ? 'On-yomi' : 'Kun-yomi'}${ex.reading ? ': ' + ex.reading : ''}</div>` : ''}
+          <div class="jp">${ex.jp} ${TTS.buttons(ex.jp)}</div>
+          <div class="reading">${ex.reading_text || ''}</div>
+          <div class="en">${ex.en}</div>
+        </div>`).join('')}
         <div class="btn-row">
           <button class="btn secondary" id="practice-btn">✍️ Practice writing</button>
           <button class="btn" id="quiz-btn">Quiz me on this kanji</button>
@@ -351,7 +424,7 @@ function renderKanjiDetail(grade, kanjiChar) {
         extra.innerHTML = `<div class="quiz-score">${score} / ${total}</div>`;
       });
     });
-  }, `${k.kanji} — ${k.meaning}`, `Grade ${grade}`);
+  }, `${k.kanji} — ${k.meaning}`, GRADE_LABEL[grade]);
 }
 
 // ---------- Vocabulary ----------

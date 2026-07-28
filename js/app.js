@@ -256,7 +256,7 @@ function renderHome() {
 const ELEMENTARY_GRADES = [1, 2, 3, 4, 5, 6];
 const TIER_GRADES = [7, 8, 9];
 const ALL_KANJI_GRADES = ELEMENTARY_GRADES.concat(TIER_GRADES);
-const BUILT_KANJI_GRADES = [1, 2, 3, 4, 5, 6, 7]; // grades with content available so far
+const BUILT_KANJI_GRADES = [1, 2, 3, 4, 5, 6, 7, 8]; // grades with content available so far
 const GRADE_KANJI_COUNTS = { 1: 80, 2: 160, 3: 200, 4: 202, 5: 193, 6: 191 }; // final counts for finished grades; tiers use live counts instead (see kanjiCountLabel)
 const GRADE_KANJI_TARGET = { 7: 371, 8: 371, 9: 372 }; // ~1,114 remaining jouyou kanji split into three batches
 const GRADE_JLPT = { 1: 'N5', 2: 'N4', 3: 'N4', 4: 'N3', 5: 'N3', 6: 'N2' }; // tiers 7-9 intentionally omitted: each kanji carries its own true jlpt tag instead (see note above)

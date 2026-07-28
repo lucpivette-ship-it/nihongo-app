@@ -12,14 +12,19 @@ const state = {
   viewStack: []
 };
 
-async function fetchText(path) {
-  const res = await fetch(path, { cache: 'no-store' });
+async function fetchText(path, opts = {}) {
+  const res = await fetch(path, opts.noStore ? { cache: 'no-store' } : undefined);
   if (!res.ok) throw new Error('Failed to fetch ' + path);
   return res.text();
 }
 
 async function loadFileList() {
-  const text = await fetchText(CONTENT + 'index.md');
+  // The index itself must always be fresh (see PROJECT_LOG "browser HTTP
+  // cache" note) so newly-added content is discovered immediately. Individual
+  // note files below are fetched with normal caching so repeat visits are
+  // fast — the tradeoff (an edited-in-place note staying stale until the
+  // browser's cache expires) is minor compared to the index.md staleness bug.
+  const text = await fetchText(CONTENT + 'index.md', { noStore: true });
   const lines = text.split(/\r?\n/).filter(l => l.startsWith('- '));
   state.fileList = lines.map(l => l.slice(2).trim());
 }
@@ -27,15 +32,14 @@ async function loadFileList() {
 async function loadKanjiGrade(grade) {
   if (state.kanjiByGrade[grade]) return state.kanjiByGrade[grade];
   const files = state.fileList.filter(f => new RegExp(`^kanji/grade${grade}/\\d+-.+\\.md$`).test(f));
-  const items = [];
-  for (const f of files) {
+  const items = await Promise.all(files.map(async (f) => {
     const text = await fetchText(CONTENT + f);
     const { data, body } = parseFrontmatter(text);
     const jpMatch = body.match(/\*\*JP:\*\*\s*(.+)/);
     const readingMatch = body.match(/\*\*Reading:\*\*\s*(.+)/);
     const enMatch = body.match(/\*\*EN:\*\*\s*(.+)/);
     const orderMatch = f.match(/\/(\d+)-[^/]+\.md$/);
-    items.push({
+    return {
       kanji: data.kanji,
       strokes: data.strokes,
       onyomi: Array.isArray(data.onyomi) ? data.onyomi : [],
@@ -50,8 +54,8 @@ async function loadKanjiGrade(grade) {
         reading: readingMatch ? readingMatch[1].trim() : '',
         en: enMatch ? enMatch[1].trim() : ''
       }
-    });
-  }
+    };
+  }));
   items.sort((a, b) => a.order - b.order);
   state.kanjiByGrade[grade] = items;
   const groups = {};
@@ -63,19 +67,18 @@ async function loadKanjiGrade(grade) {
 async function loadVocab() {
   if (state.vocabCategories.length) return state.vocabCategories;
   const files = state.fileList.filter(f => /^vocab\/.+\.md$/.test(f) && f !== 'vocab/index.md');
-  const cats = [];
-  for (const f of files) {
+  const cats = await Promise.all(files.map(async (f) => {
     const text = await fetchText(CONTENT + f);
     const { data, body } = parseFrontmatter(text);
     const titleMatch = body.match(/^#\s+Vocabulary\s+—\s+(.+)$/m);
     const rows = parseMarkdownTable(body).slice(1); // skip header row
-    cats.push({
+    return {
       slug: f,
       title: titleMatch ? titleMatch[1].trim() : f,
       tags: data.tags || [],
       words: rows.map(r => ({ term: r[0], reading: r[1], meaning: r[2], jlpt: (r[3] || '').replace('#', ''), example: r[4] }))
-    });
-  }
+    };
+  }));
   cats.sort((a, b) => a.title.localeCompare(b.title));
   state.vocabCategories = cats;
   return cats;
@@ -84,13 +87,12 @@ async function loadVocab() {
 async function loadGrammar() {
   if (state.grammarPoints.length) return state.grammarPoints;
   const files = state.fileList.filter(f => /^grammar\/.+\.md$/.test(f) && f !== 'grammar/index.md');
-  const points = [];
-  for (const f of files) {
+  const points = await Promise.all(files.map(async (f) => {
     const text = await fetchText(CONTENT + f);
     const { data, body } = parseFrontmatter(text);
     const titleMatch = body.match(/^#\s+(.+)$/m);
-    points.push({ slug: f, title: titleMatch ? titleMatch[1].trim() : f, jlpt: data.jlpt, body });
-  }
+    return { slug: f, title: titleMatch ? titleMatch[1].trim() : f, jlpt: data.jlpt, body };
+  }));
   points.sort((a, b) => (a.jlpt || '').localeCompare(b.jlpt || ''));
   state.grammarPoints = points;
   return points;
@@ -99,13 +101,12 @@ async function loadGrammar() {
 async function loadReadings() {
   if (state.readings.length) return state.readings;
   const files = state.fileList.filter(f => /^readings\/.+\.md$/.test(f) && f !== 'readings/index.md');
-  const items = [];
-  for (const f of files) {
+  const items = await Promise.all(files.map(async (f) => {
     const text = await fetchText(CONTENT + f);
     const { data, body } = parseFrontmatter(text);
     const titleMatch = body.match(/^#\s+(.+)$/m);
-    items.push({ slug: f, title: titleMatch ? titleMatch[1].trim() : f, jlpt: data.jlpt, body });
-  }
+    return { slug: f, title: titleMatch ? titleMatch[1].trim() : f, jlpt: data.jlpt, body };
+  }));
   state.readings = items;
   return items;
 }
@@ -113,13 +114,12 @@ async function loadReadings() {
 async function loadOther() {
   if (state.otherNotes.length) return state.otherNotes;
   const files = state.fileList.filter(f => /^other\/.+\.md$/.test(f) && f !== 'other/index.md');
-  const items = [];
-  for (const f of files) {
+  const items = await Promise.all(files.map(async (f) => {
     const text = await fetchText(CONTENT + f);
     const { data, body } = parseFrontmatter(text);
     const titleMatch = body.match(/^#\s+(.+)$/m);
-    items.push({ slug: f, title: titleMatch ? titleMatch[1].trim() : f, body });
-  }
+    return { slug: f, title: titleMatch ? titleMatch[1].trim() : f, body };
+  }));
   state.otherNotes = items;
   return items;
 }
@@ -208,7 +208,7 @@ const GRADE_JLPT = { 1: 'N5', 2: 'N4', 3: 'N4', 4: 'N3', 5: 'N3', 6: 'N2' };
 function renderKanjiHome() {
   pushView(async () => {
     main.innerHTML = '<p>Loading…</p>';
-    for (const g of BUILT_KANJI_GRADES) await loadKanjiGrade(g);
+    await Promise.all(BUILT_KANJI_GRADES.map(g => loadKanjiGrade(g)));
     main.innerHTML = `
       <div class="section-title">Elementary grades</div>
       ${[1, 2, 3, 4, 5, 6].map(g => {

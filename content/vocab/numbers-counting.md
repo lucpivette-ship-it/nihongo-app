@@ -43,5 +43,15 @@ tags: [vocab, daily-life]
 | 〜枚 | ~mai | counter for thin flat objects | #N5 | 紙を三枚使います。 *(I use three sheets of paper.)* |
 | 〜匹 | ~hiki | counter for small animals | #N5 | 猫が二匹います。 *(There are two cats.)* |
 | 〜歳 | ~sai | ~years old | #N5 | 彼は二十歳です。 *(He is 20 years old.)* |
+| 〜回 | ~kai | ~times | #N5 | 三回読みました。 *(I read it three times.)* |
+| 〜側 | ~gawa | ~side | #N5 | 右側に立ちます。 *(I'll stand on the right side.)* |
+| キロ | kiro | kg / km | #N5 | 五キロ走りました。 *(I ran five kilometers.)* |
+| 〜人 | ~nin | ~people (counter) | #N5 | 三人で来ました。 *(Three people came.)* |
+| 〜人 | ~jin | ~ese, ~an (nationality) | #N5 | 私は日本人です。 *(I am Japanese.)* |
+| 〜ずつ | ~zutsu | ~ each | #N5 | 一つずつ配ります。 *(I'll hand out one each.)* |
+| 〜達 | ~tachi | more than one, and others | #N5 | 友達と行きます。 *(I'll go with friends.)* |
+| れい | rei | zero | #N5 | 点数はれいでした。 *(The score was zero.)* |
+| 〜はい | ~hai | cups of ~ | #N5 | お茶を一杯ください。 *(One cup of tea, please.)* |
+| 〜番 | ~ban | No.~, ranking | #N5 | 一番の答えです。 *(It's answer number one.)* |
 
 #vocab #daily-life

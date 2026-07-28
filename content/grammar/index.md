@@ -32,6 +32,26 @@ Core N5 grammar points plus a growing set of N4/N3 points, tagged by JLPT level,
 - [[made|まで — until / as far as]] — #N5
 - [[mou|もう — already / anymore]] — #N5
 - [[deshou|でしょう — probably / I think / right?]] — #N5
+- [[i-adjectives|い-adjectives — descriptive adjectives ending in い]] — #N5
+- [[na-adjectives|な-adjectives — descriptive adjectives needing な/です]] — #N5
+- [[da-desu|だ／です — to be (am, is, are)]] — #N5
+- [[janai-dewa-nai|じゃない・ではない — to not be]] — #N5
+- [[dake|だけ — only / just / as much as]] — #N5
+- [[darou|だろう — I think / it seems / probably]] — #N5
+- [[demo|でも — but / however]] — #N5
+- [[donna|どんな — what kind of]] — #N5
+- [[doushite|どうして — why / for what reason]] — #N5
+- [[douyatte|どうやって — how / by what means]] — #N5
+- [[ga-arimasu|があります — there is (non-living things)]] — #N5
+- [[ga-imasu|がいます — there is / to be (living things)]] — #N5
+- [[ga-hoshii|がほしい — to want something]] — #N5
+- [[hou-ga-ii|ほうがいい — had better / should]] — #N5
+- [[ichiban|いちばん — the most / the best]] — #N5
+- [[issho-ni|いっしょに — together]] — #N5
+- [[itsumo|いつも — always / usually]] — #N5
+- [[ne-particle|ね — isn't it? / right?]] — #N5
+- [[to-particle|と — and / with (connecting particle)]] — #N5
+- [[totemo|とても — very / awfully]] — #N5
 - [[nakereba-narimasen|〜なければなりません — must / have to]] — #N4
 - [[tara-conditional|〜たら — conditional]] — #N4
 - [[ba-conditional|〜ば — conditional]] — #N3

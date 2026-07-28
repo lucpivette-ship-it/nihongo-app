@@ -1298,8 +1298,10 @@ Master list of content files (used by app.js and service-worker.js).
 - readings/index.md
 - readings/kaisha-no-kaigi.md
 - readings/watashi-no-ichinichi.md
+- vocab/calendar-time-words.md
 - vocab/clothing.md
 - vocab/colors-shapes.md
+- vocab/descriptive-words.md
 - vocab/entertainment-hobbies.md
 - vocab/family-people.md
 - vocab/food-dining.md
@@ -1308,6 +1310,7 @@ Master list of content files (used by app.js and service-worker.js).
 - vocab/household-objects.md
 - vocab/index.md
 - vocab/numbers-counting.md
+- vocab/other-essentials.md
 - vocab/places-directions.md
 - vocab/question-pronouns.md
 - vocab/school-language.md
@@ -1315,5 +1318,6 @@ Master list of content files (used by app.js and service-worker.js).
 - vocab/technology-communication.md
 - vocab/time-schedule.md
 - vocab/transportation.md
+- vocab/verbs-actions.md
 - vocab/weather-nature.md
 - vocab/work-office.md

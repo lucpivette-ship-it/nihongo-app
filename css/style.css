@@ -117,6 +117,7 @@ html, body {
 .sentence-block .jp { font-size: 18px; margin-bottom: 4px; }
 .sentence-block .reading { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
 .sentence-block .en { font-size: 14px; font-style: italic; }
+.example-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; color: var(--accent, #b3282d); margin-bottom: 6px; }
 
 .trace-wrap { position: relative; width: 220px; height: 220px; margin: 10px auto; border: 2px dashed var(--border); border-radius: 16px; }
 .trace-wrap canvas { position: absolute; top: 0; left: 0; touch-action: none; }

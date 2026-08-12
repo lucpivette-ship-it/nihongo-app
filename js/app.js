@@ -254,14 +254,14 @@ function renderHome() {
 // see GRADE_LABEL below, which no longer claims a single JLPT level per
 // tier.
 const ELEMENTARY_GRADES = [1, 2, 3, 4, 5, 6];
-const TIER_GRADES = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+const TIER_GRADES = [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
 const ALL_KANJI_GRADES = ELEMENTARY_GRADES.concat(TIER_GRADES);
-const BUILT_KANJI_GRADES = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]; // grades with content available so far
+const BUILT_KANJI_GRADES = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21]; // grades with content available so far
 const GRADE_KANJI_COUNTS = { 1: 80, 2: 160, 3: 200, 4: 202, 5: 193, 6: 191 }; // final counts for finished grades; tiers use live counts instead (see kanjiCountLabel)
-const GRADE_KANJI_TARGET = { 7: 50, 8: 50, 9: 50, 10: 50, 11: 50, 12: 50, 13: 50, 14: 50, 15: 50, 16: 50, 17: 50, 18: 50, 19: 50, 20: 50 }; // each remaining-jouyou batch is a fixed 50 kanji (fixed 2026-07-30: was a stale ~371/372 split left over from an abandoned 3-batch plan, which made every finished batch's tile misleadingly read "50 of 371/372 kanji")
+const GRADE_KANJI_TARGET = { 7: 50, 8: 50, 9: 50, 10: 50, 11: 50, 12: 50, 13: 50, 14: 50, 15: 50, 16: 50, 17: 50, 18: 50, 19: 50, 20: 50, 21: 50 }; // each remaining-jouyou batch is a fixed 50 kanji (fixed 2026-07-30: was a stale ~371/372 split left over from an abandoned 3-batch plan, which made every finished batch's tile misleadingly read "50 of 371/372 kanji")
 const GRADE_JLPT = { 1: 'N5', 2: 'N4', 3: 'N4', 4: 'N3', 5: 'N3', 6: 'N2' }; // tiers 7+ intentionally omitted: each kanji carries its own true jlpt tag instead (see note above)
-const GRADE_LABEL = { 1: 'Grade 1', 2: 'Grade 2', 3: 'Grade 3', 4: 'Grade 4', 5: 'Grade 5', 6: 'Grade 6', 7: 'Remaining kanji (1)', 8: 'Remaining kanji (2)', 9: 'Remaining kanji (3)', 10: 'Remaining kanji (4)', 11: 'Remaining kanji (5)', 12: 'Remaining kanji (6)', 13: 'Remaining kanji (7)', 14: 'Remaining kanji (8)', 15: 'Remaining kanji (9)', 16: 'Remaining kanji (10)', 17: 'Remaining kanji (11)', 18: 'Remaining kanji (12)', 19: 'Remaining kanji (13)', 20: 'Remaining kanji (14)' };
-const GRADE_TAB_LABEL = { 1: 'G1', 2: 'G2', 3: 'G3', 4: 'G4', 5: 'G5', 6: 'G6', 7: 'R1', 8: 'R2', 9: 'R3', 10: 'R4', 11: 'R5', 12: 'R6', 13: 'R7', 14: 'R8', 15: 'R9', 16: 'R10', 17: 'R11', 18: 'R12', 19: 'R13', 20: 'R14' };
+const GRADE_LABEL = { 1: 'Grade 1', 2: 'Grade 2', 3: 'Grade 3', 4: 'Grade 4', 5: 'Grade 5', 6: 'Grade 6', 7: 'Remaining kanji (1)', 8: 'Remaining kanji (2)', 9: 'Remaining kanji (3)', 10: 'Remaining kanji (4)', 11: 'Remaining kanji (5)', 12: 'Remaining kanji (6)', 13: 'Remaining kanji (7)', 14: 'Remaining kanji (8)', 15: 'Remaining kanji (9)', 16: 'Remaining kanji (10)', 17: 'Remaining kanji (11)', 18: 'Remaining kanji (12)', 19: 'Remaining kanji (13)', 20: 'Remaining kanji (14)', 21: 'Remaining kanji (15)' };
+const GRADE_TAB_LABEL = { 1: 'G1', 2: 'G2', 3: 'G3', 4: 'G4', 5: 'G5', 6: 'G6', 7: 'R1', 8: 'R2', 9: 'R3', 10: 'R4', 11: 'R5', 12: 'R6', 13: 'R7', 14: 'R8', 15: 'R9', 16: 'R10', 17: 'R11', 18: 'R12', 19: 'R13', 20: 'R14', 21: 'R15' };
 
 function kanjiCountLabel(g) {
   const loaded = state.kanjiByGrade[g] ? state.kanjiByGrade[g].length : GRADE_KANJI_COUNTS[g];

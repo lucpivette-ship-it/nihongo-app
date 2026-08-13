@@ -2674,6 +2674,7 @@ Master list of content files (used by app.js and service-worker.js).
 - vocab/n3-essentials-2.md
 - vocab/n3-essentials-3.md
 - vocab/n3-essentials-4.md
+- vocab/n3-essentials-5.md
 - vocab/n4-essentials.md
 - vocab/n4-essentials-2.md
 - vocab/numbers-counting.md
@@ -2692,5 +2693,6 @@ Master list of content files (used by app.js and service-worker.js).
 - vocab/verbs-actions-n3-2.md
 - vocab/verbs-actions-n3-3.md
 - vocab/verbs-actions-n3-4.md
+- vocab/verbs-actions-n3-5.md
 - vocab/weather-nature.md
 - vocab/work-office.md

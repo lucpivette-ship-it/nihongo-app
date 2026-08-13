@@ -409,8 +409,8 @@ function renderGroupList(grade) {
 // single combined group list spanning all of them. Each card still carries
 // its true (grade, groupNum) so renderGroupDetail/quiz logic is untouched.
 function renderTierGroupList(tierIndex) {
+  const tier = TIER_DISPLAY_GROUPS[tierIndex];
   pushView(async () => {
-    const tier = TIER_DISPLAY_GROUPS[tierIndex];
     main.innerHTML = '<p>Loading…</p>';
     await Promise.all(tier.grades.map(loadKanjiGrade));
     const combined = [];

@@ -2670,6 +2670,7 @@ Master list of content files (used by app.js and service-worker.js).
 - vocab/health.md
 - vocab/household-objects.md
 - vocab/index.md
+- vocab/n3-essentials.md
 - vocab/n4-essentials.md
 - vocab/n4-essentials-2.md
 - vocab/numbers-counting.md
@@ -2684,5 +2685,6 @@ Master list of content files (used by app.js and service-worker.js).
 - vocab/verbs-actions.md
 - vocab/verbs-actions-2.md
 - vocab/verbs-actions-3.md
+- vocab/verbs-actions-n3.md
 - vocab/weather-nature.md
 - vocab/work-office.md

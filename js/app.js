@@ -264,15 +264,33 @@ const GRADE_LABEL = { 1: 'Grade 1', 2: 'Grade 2', 3: 'Grade 3', 4: 'Grade 4', 5:
 const GRADE_TAB_LABEL = { 1: 'G1', 2: 'G2', 3: 'G3', 4: 'G4', 5: 'G5', 6: 'G6', 7: 'R1', 8: 'R2', 9: 'R3', 10: 'R4', 11: 'R5', 12: 'R6', 13: 'R7', 14: 'R8', 15: 'R9', 16: 'R10', 17: 'R11', 18: 'R12', 19: 'R13', 20: 'R14', 21: 'R15', 22: 'R16', 23: 'R17', 24: 'R18', 25: 'R19', 26: 'R20', 27: 'R21', 28: 'R22', 29: 'R23' };
 
 function kanjiCountLabel(g) {
-  const loaded = state.kanjiByGrade[g] ? state.kanjiByGrade[g].length : GRADE_KANJI_COUNTS[g];
+  // Use a static count (GRADE_KANJI_COUNTS for elementary, GRADE_KANJI_TARGET
+  // for remaining-jouyou tiers, which is always the true final count once a
+  // batch is complete) whenever the grade hasn't been loaded yet, so the
+  // Kanji home screen can render tile counts WITHOUT fetching every kanji
+  // file first. See the 2026-08-13 fix below on why this matters at scale.
+  const loaded = state.kanjiByGrade[g] ? state.kanjiByGrade[g].length : (GRADE_KANJI_COUNTS[g] || GRADE_KANJI_TARGET[g]);
   const target = GRADE_KANJI_TARGET[g];
   return (target && loaded !== target) ? `${loaded} of ${target} kanji` : `${loaded} kanji`;
 }
 
 function renderKanjiHome() {
-  pushView(async () => {
-    main.innerHTML = '<p>Loading…</p>';
-    await Promise.all(BUILT_KANJI_GRADES.map(g => loadKanjiGrade(g)));
+  pushView(() => {
+    // Fixed 2026-08-13: this used to `await Promise.all(BUILT_KANJI_GRADES.map(loadKanjiGrade))`
+    // before rendering anything — i.e. fetch every one of the (now) 2,140
+    // kanji files across all 29 grades just to show a list of tiles. That
+    // was fine back when there were ~150-1,026 kanji total, but at 2,140 a
+    // cold-cache visit fires that many concurrent fetch() calls at once,
+    // which can exceed the browser's connection limits and throw "Failed to
+    // fetch" on some of them — with no per-grade error handling, that
+    // rejects the whole Promise.all and leaves the screen stuck on
+    // "Loading…" forever, i.e. the Kanji section never renders at all. The
+    // fix: render the tile list immediately from static counts
+    // (kanjiCountLabel already falls back to GRADE_KANJI_COUNTS/
+    // GRADE_KANJI_TARGET when a grade isn't loaded yet), and only fetch a
+    // given grade's actual kanji content lazily, on demand, when the user
+    // taps into that one grade (see renderGroupList below) — one grade is
+    // at most 202 files, never thousands at once.
     main.innerHTML = `
       <div class="section-title">Elementary grades</div>
       ${ELEMENTARY_GRADES.map(g => {
@@ -296,9 +314,16 @@ function renderKanjiHome() {
 }
 
 function renderGroupList(grade) {
-  pushView(() => {
+  pushView(async () => {
+    // Lazily load just this one grade (see the 2026-08-13 fix note in
+    // renderKanjiHome above) instead of assuming every grade was already
+    // pre-loaded. loadKanjiGrade() itself no-ops if this grade is already
+    // in state.kanjiByGrade, so re-visiting a grade is instant.
+    main.innerHTML = '<p>Loading…</p>';
+    await loadKanjiGrade(grade);
     const groups = state.groupsByGrade[grade];
     const groupNums = Object.keys(groups).map(Number).sort((a, b) => a - b);
+    headerSub.textContent = `${groupNums.length} groups of 5`;
     const gradeTabs = ALL_KANJI_GRADES.map(g => {
       const built = BUILT_KANJI_GRADES.includes(g);
       return `<button class="grade-tab ${g === grade ? 'active' : ''}" data-grade="${g}" ${built ? '' : 'disabled'}>${GRADE_TAB_LABEL[g]}</button>`;
@@ -323,7 +348,7 @@ function renderGroupList(grade) {
         replaceView(() => renderGroupList(g));
       });
     });
-  }, `${GRADE_LABEL[grade]} Kanji`, `${Object.keys(state.groupsByGrade[grade]).length} groups of 5`);
+  }, `${GRADE_LABEL[grade]} Kanji`, '');
 }
 
 function renderGroupDetail(grade, groupNum) {

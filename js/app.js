@@ -263,6 +263,65 @@ const GRADE_JLPT = { 1: 'N5', 2: 'N4', 3: 'N4', 4: 'N3', 5: 'N3', 6: 'N2' }; // 
 const GRADE_LABEL = { 1: 'Grade 1', 2: 'Grade 2', 3: 'Grade 3', 4: 'Grade 4', 5: 'Grade 5', 6: 'Grade 6', 7: 'Remaining kanji (1)', 8: 'Remaining kanji (2)', 9: 'Remaining kanji (3)', 10: 'Remaining kanji (4)', 11: 'Remaining kanji (5)', 12: 'Remaining kanji (6)', 13: 'Remaining kanji (7)', 14: 'Remaining kanji (8)', 15: 'Remaining kanji (9)', 16: 'Remaining kanji (10)', 17: 'Remaining kanji (11)', 18: 'Remaining kanji (12)', 19: 'Remaining kanji (13)', 20: 'Remaining kanji (14)', 21: 'Remaining kanji (15)', 22: 'Remaining kanji (16)', 23: 'Remaining kanji (17)', 24: 'Remaining kanji (18)', 25: 'Remaining kanji (19)', 26: 'Remaining kanji (20)', 27: 'Remaining kanji (21)', 28: 'Remaining kanji (22)', 29: 'Remaining kanji (23, final)' };
 const GRADE_TAB_LABEL = { 1: 'G1', 2: 'G2', 3: 'G3', 4: 'G4', 5: 'G5', 6: 'G6', 7: 'R1', 8: 'R2', 9: 'R3', 10: 'R4', 11: 'R5', 12: 'R6', 13: 'R7', 14: 'R8', 15: 'R9', 16: 'R10', 17: 'R11', 18: 'R12', 19: 'R13', 20: 'R14', 21: 'R15', 22: 'R16', 23: 'R17', 24: 'R18', 25: 'R19', 26: 'R20', 27: 'R21', 28: 'R22', 29: 'R23' };
 
+// Display-only consolidation (2026-08-13): the 23 individual "Remaining
+// kanji" tiles above (one per ~50-kanji batch/grade) made the Kanji home
+// screen's second section unwieldy at full scale. Luc asked to regroup the
+// HOME SCREEN into ~200-kanji tiles, with zero changes to underlying
+// content, folders, or per-grade group/quiz data. So this is purely a
+// display layer: each bucket below just lists which real grades it spans;
+// every real (grade, groupNum) pair still flows into the unchanged
+// renderGroupDetail/buildQuizForGroup exactly as before. Batch numbers in
+// the labels (1–4, 5–8, ...) trace back to GRADE_LABEL's original
+// "Remaining kanji (N)" numbering so history stays traceable.
+const TIER_DISPLAY_GROUPS = [
+  { grades: [7, 8, 9, 10], label: 'Remaining kanji (1–4)', tabLabel: 'R1-4' },
+  { grades: [11, 12, 13, 14], label: 'Remaining kanji (5–8)', tabLabel: 'R5-8' },
+  { grades: [15, 16, 17, 18], label: 'Remaining kanji (9–12)', tabLabel: 'R9-12' },
+  { grades: [19, 20, 21, 22], label: 'Remaining kanji (13–16)', tabLabel: 'R13-16' },
+  { grades: [23, 24, 25, 26], label: 'Remaining kanji (17–20)', tabLabel: 'R17-20' },
+  { grades: [27, 28, 29], label: 'Remaining kanji (21–23, final)', tabLabel: 'R21-23' },
+];
+
+function tierIndexForGrade(grade) {
+  return TIER_DISPLAY_GROUPS.findIndex(t => t.grades.includes(grade));
+}
+
+function tierKanjiCount(tier) {
+  return tier.grades.reduce((sum, g) => sum + (GRADE_KANJI_TARGET[g] || 0), 0);
+}
+
+// Shared tab bar for both the single-grade (elementary) and tier-bucket
+// (consolidated remaining-jōyō) group-list screens, so navigation is
+// consistent everywhere in the Kanji section: 6 elementary tabs + 6 tier
+// tabs, never the old 29 individual-grade tabs.
+function kanjiNavTabsHtml(activeGrade, activeTierIndex) {
+  const elementaryTabs = ELEMENTARY_GRADES.map(g => {
+    const built = BUILT_KANJI_GRADES.includes(g);
+    return `<button class="grade-tab ${g === activeGrade ? 'active' : ''}" data-nav="grade:${g}" ${built ? '' : 'disabled'}>${GRADE_TAB_LABEL[g]}</button>`;
+  }).join('');
+  const tierTabs = TIER_DISPLAY_GROUPS.map((t, i) => {
+    const built = t.grades.every(g => BUILT_KANJI_GRADES.includes(g));
+    return `<button class="grade-tab ${i === activeTierIndex ? 'active' : ''}" data-nav="tier:${i}" ${built ? '' : 'disabled'}>${t.tabLabel}</button>`;
+  }).join('');
+  return elementaryTabs + tierTabs;
+}
+
+function wireKanjiNavTabs(container) {
+  container.querySelectorAll('.grade-tab').forEach(el => {
+    el.addEventListener('click', async () => {
+      if (el.disabled || el.classList.contains('active')) return;
+      const [kind, val] = el.dataset.nav.split(':');
+      if (kind === 'grade') {
+        const g = Number(val);
+        await loadKanjiGrade(g);
+        replaceView(() => renderGroupList(g));
+      } else {
+        replaceView(() => renderTierGroupList(Number(val)));
+      }
+    });
+  });
+}
+
 function kanjiCountLabel(g) {
   // Use a static count (GRADE_KANJI_COUNTS for elementary, GRADE_KANJI_TARGET
   // for remaining-jouyou tiers, which is always the true final count once a
@@ -300,15 +359,18 @@ function renderKanjiHome() {
           : `<div class="card coming-soon">${GRADE_LABEL[g]} — coming soon</div>`;
       }).join('')}
       <div class="section-title">Remaining jōyō kanji</div>
-      ${TIER_GRADES.map(g => {
-        const built = BUILT_KANJI_GRADES.includes(g);
+      ${TIER_DISPLAY_GROUPS.map((t, i) => {
+        const built = t.grades.every(g => BUILT_KANJI_GRADES.includes(g));
         return built
-          ? `<div class="card" data-grade="${g}">${GRADE_LABEL[g]} — ${kanjiCountLabel(g)}</div>`
-          : `<div class="card coming-soon">${GRADE_LABEL[g]} — coming soon</div>`;
+          ? `<div class="card" data-tier="${i}">${t.label} — ${tierKanjiCount(t)} kanji</div>`
+          : `<div class="card coming-soon">${t.label} — coming soon</div>`;
       }).join('')}
     `;
     main.querySelectorAll('[data-grade]').forEach(el => {
       el.addEventListener('click', () => renderGroupList(Number(el.dataset.grade)));
+    });
+    main.querySelectorAll('[data-tier]').forEach(el => {
+      el.addEventListener('click', () => renderTierGroupList(Number(el.dataset.tier)));
     });
   }, 'Kanji', 'Grades 1–6 & remaining jōyō kanji');
 }
@@ -324,12 +386,8 @@ function renderGroupList(grade) {
     const groups = state.groupsByGrade[grade];
     const groupNums = Object.keys(groups).map(Number).sort((a, b) => a - b);
     headerSub.textContent = `${groupNums.length} groups of 5`;
-    const gradeTabs = ALL_KANJI_GRADES.map(g => {
-      const built = BUILT_KANJI_GRADES.includes(g);
-      return `<button class="grade-tab ${g === grade ? 'active' : ''}" data-grade="${g}" ${built ? '' : 'disabled'}>${GRADE_TAB_LABEL[g]}</button>`;
-    }).join('');
     main.innerHTML = `
-      <div class="grade-tabs">${gradeTabs}</div>
+      <div class="grade-tabs">${kanjiNavTabsHtml(grade, undefined)}</div>
       <div class="group-list">` + groupNums.map(g => {
       const kanjiStr = groups[g].map(k => k.kanji).join('');
       return `<div class="card" data-group="${g}">
@@ -340,29 +398,80 @@ function renderGroupList(grade) {
     main.querySelectorAll('[data-group]').forEach(el => {
       el.addEventListener('click', () => renderGroupDetail(grade, Number(el.dataset.group)));
     });
-    main.querySelectorAll('.grade-tab').forEach(el => {
-      el.addEventListener('click', async () => {
-        const g = Number(el.dataset.grade);
-        if (g === grade || el.disabled) return;
-        await loadKanjiGrade(g);
-        replaceView(() => renderGroupList(g));
-      });
-    });
+    wireKanjiNavTabs(main);
   }, `${GRADE_LABEL[grade]} Kanji`, '');
 }
 
-function renderGroupDetail(grade, groupNum) {
+// Consolidated view for one ~200-kanji tier bucket (display-only grouping
+// of several real grades — see TIER_DISPLAY_GROUPS above). Loads every
+// real grade in the bucket (at most 4 grades = ~200 files, well under the
+// scale that caused the 2026-08-13 "Failed to fetch" bug), then renders a
+// single combined group list spanning all of them. Each card still carries
+// its true (grade, groupNum) so renderGroupDetail/quiz logic is untouched.
+function renderTierGroupList(tierIndex) {
+  pushView(async () => {
+    const tier = TIER_DISPLAY_GROUPS[tierIndex];
+    main.innerHTML = '<p>Loading…</p>';
+    await Promise.all(tier.grades.map(loadKanjiGrade));
+    const combined = [];
+    tier.grades.forEach(g => {
+      Object.keys(state.groupsByGrade[g]).map(Number).sort((a, b) => a - b).forEach(gn => {
+        combined.push({ grade: g, groupNum: gn });
+      });
+    });
+    headerSub.textContent = `${combined.length} groups of 5 · ${tierKanjiCount(tier)} kanji`;
+    main.innerHTML = `
+      <div class="grade-tabs">${kanjiNavTabsHtml(undefined, tierIndex)}</div>
+      <div class="group-list">` + combined.map((c, i) => {
+      const kanjiStr = state.groupsByGrade[c.grade][c.groupNum].map(k => k.kanji).join('');
+      return `<div class="card" data-grade="${c.grade}" data-group="${c.groupNum}">
+        <div><div class="group-kanji-preview">${kanjiStr}</div><div class="group-meta">Group ${i + 1} of ${combined.length} · 5 kanji</div></div>
+        <span>›</span>
+      </div>`;
+    }).join('') + `</div>`;
+    main.querySelectorAll('.group-list [data-group]').forEach(el => {
+      el.addEventListener('click', () => renderGroupDetail(Number(el.dataset.grade), Number(el.dataset.group), tierIndex));
+    });
+    wireKanjiNavTabs(main);
+  }, tier.label, '');
+}
+
+// tierIndex is optional: pass it when arriving from a consolidated
+// ~200-kanji tier tile (renderTierGroupList) so prev/next flips seamlessly
+// across the real grade boundaries WITHIN that bucket, matching the "one
+// big tile" mental model the consolidated home-screen tiles present. Every
+// grade in the bucket was already loaded by renderTierGroupList before
+// entry, so this cross-grade lookup never needs to await anything. Omit
+// tierIndex (as renderGroupList does for elementary grades) to keep
+// prev/next scoped to a single real grade, unchanged from before.
+function renderGroupDetail(grade, groupNum, tierIndex) {
   pushView(() => {
     const kanjiList = state.groupsByGrade[grade][groupNum];
-    const groupNums = Object.keys(state.groupsByGrade[grade]).map(Number).sort((a, b) => a - b);
-    const idx = groupNums.indexOf(groupNum);
-    const prevNum = idx > 0 ? groupNums[idx - 1] : null;
-    const nextNum = idx < groupNums.length - 1 ? groupNums[idx + 1] : null;
+    let idx, total, prevRef, nextRef;
+    if (tierIndex !== undefined) {
+      const tier = TIER_DISPLAY_GROUPS[tierIndex];
+      const combined = [];
+      tier.grades.forEach(g => {
+        Object.keys(state.groupsByGrade[g]).map(Number).sort((a, b) => a - b).forEach(gn => {
+          combined.push({ grade: g, groupNum: gn });
+        });
+      });
+      idx = combined.findIndex(c => c.grade === grade && c.groupNum === groupNum);
+      total = combined.length;
+      prevRef = idx > 0 ? combined[idx - 1] : null;
+      nextRef = idx < combined.length - 1 ? combined[idx + 1] : null;
+    } else {
+      const groupNums = Object.keys(state.groupsByGrade[grade]).map(Number).sort((a, b) => a - b);
+      idx = groupNums.indexOf(groupNum);
+      total = groupNums.length;
+      prevRef = idx > 0 ? { grade, groupNum: groupNums[idx - 1] } : null;
+      nextRef = idx < groupNums.length - 1 ? { grade, groupNum: groupNums[idx + 1] } : null;
+    }
     main.innerHTML = `
       <div class="detail-nav">
-        <button class="nav-arrow" id="prev-group-btn" ${prevNum === null ? 'disabled' : ''}>‹ Group ${prevNum !== null ? String(prevNum).padStart(2, '0') : ''}</button>
-        <span class="nav-pos">Group ${idx + 1} / ${groupNums.length}</span>
-        <button class="nav-arrow" id="next-group-btn" ${nextNum === null ? 'disabled' : ''}>Group ${nextNum !== null ? String(nextNum).padStart(2, '0') : ''} ›</button>
+        <button class="nav-arrow" id="prev-group-btn" ${prevRef ? '' : 'disabled'}>‹ Group ${prevRef ? String(prevRef.groupNum).padStart(2, '0') : ''}</button>
+        <span class="nav-pos">Group ${idx + 1} / ${total}</span>
+        <button class="nav-arrow" id="next-group-btn" ${nextRef ? '' : 'disabled'}>Group ${nextRef ? String(nextRef.groupNum).padStart(2, '0') : ''} ›</button>
       </div>
       <div class="kanji-grid">
         ${kanjiList.map(k => `<div class="kanji-tile" data-kanji="${k.kanji}">${k.kanji}<span class="strokes-badge">${k.strokes}✍︎</span></div>`).join('')}
@@ -375,11 +484,11 @@ function renderGroupDetail(grade, groupNum) {
     main.querySelectorAll('[data-kanji]').forEach(el => {
       el.addEventListener('click', () => renderKanjiDetail(grade, el.dataset.kanji));
     });
-    if (prevNum !== null) {
-      document.getElementById('prev-group-btn').addEventListener('click', () => replaceView(() => renderGroupDetail(grade, prevNum)));
+    if (prevRef) {
+      document.getElementById('prev-group-btn').addEventListener('click', () => replaceView(() => renderGroupDetail(prevRef.grade, prevRef.groupNum, tierIndex)));
     }
-    if (nextNum !== null) {
-      document.getElementById('next-group-btn').addEventListener('click', () => replaceView(() => renderGroupDetail(grade, nextNum)));
+    if (nextRef) {
+      document.getElementById('next-group-btn').addEventListener('click', () => replaceView(() => renderGroupDetail(nextRef.grade, nextRef.groupNum, tierIndex)));
     }
     document.getElementById('quiz-group-btn').addEventListener('click', () => {
       const area = document.getElementById('quiz-area');
@@ -390,7 +499,11 @@ function renderGroupDetail(grade, groupNum) {
         document.getElementById('retry-quiz').addEventListener('click', () => document.getElementById('quiz-group-btn').click());
       });
     });
-  }, `Group ${String(groupNum).padStart(2, '0')}`, GRADE_LABEL[grade]);
+  }, `Group ${String(groupNum).padStart(2, '0')}`, subtitleFor(grade, tierIndex));
+}
+
+function subtitleFor(grade, tierIndex) {
+  return tierIndex !== undefined ? TIER_DISPLAY_GROUPS[tierIndex].label : GRADE_LABEL[grade];
 }
 
 function renderKanjiDetail(grade, kanjiChar) {

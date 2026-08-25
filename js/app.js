@@ -111,17 +111,30 @@ async function loadVocab() {
 }
 
 async function loadGrammar() {
-  if (state.grammarPoints.length) return state.grammarPoints;
-  const files = state.fileList.filter(f => /^grammar\/.+\.md$/.test(f) && f !== 'grammar/index.md');
-  const points = await Promise.all(files.map(async (f) => {
-    const text = await fetchText(CONTENT + f);
-    const { data, body } = parseFrontmatter(text);
-    const titleMatch = body.match(/^#\s+(.+)$/m);
-    return { slug: f, title: titleMatch ? titleMatch[1].trim() : f, jlpt: data.jlpt, body };
-  }));
-  points.sort((a, b) => parseInt((b.jlpt||'N0').replace('N',''),10) - parseInt((a.jlpt||'N0').replace('N',''),10));
-  state.grammarPoints = points;
-  return points;
+    if (state.grammarPoints.length) return state.grammarPoints;
+    const files = state.fileList.filter(f => /^grammar\/.+\.md$/.test(f) && f !== 'grammar/index.md');
+    const points = [];
+    for (const f of files) {
+          const text = await fetchText(CONTENT + f);
+          const { data, body } = parseFrontmatter(text);
+          const h2Count = (body.match(/^##\s+/gm) || []).length;
+          if (h2Count >= 2) {
+                const parts = body.split(/^##\s+/m).slice(1);
+                parts.forEach((part, i) => {
+                      const nl = part.indexOf('\n');
+                      const title = (nl === -1 ? part : part.slice(0, nl)).trim();
+                      const rest = (nl === -1 ? '' : part.slice(nl + 1)).trim();
+                      const jlptMatch = rest.match(/\*\*JLPT:\*\*\s*(N\d)/);
+                      points.push({ slug: f + '::' + i, title, jlpt: jlptMatch ? jlptMatch[1] : data.jlpt, body: rest });
+                });
+          } else {
+                const titleMatch = body.match(/^#\s+(.+)$/m);
+                points.push({ slug: f, title: titleMatch ? titleMatch[1].trim() : f, jlpt: data.jlpt, body });
+          }
+    }
+    points.sort((a, b) => parseInt((b.jlpt||'N0').replace('N',''),10) - parseInt((a.jlpt||'N0').replace('N',''),10));
+    state.grammarPoints = points;
+    return points;
 }
 
 async function loadReadings() {

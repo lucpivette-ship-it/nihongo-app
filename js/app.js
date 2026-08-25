@@ -119,7 +119,7 @@ async function loadGrammar() {
     const titleMatch = body.match(/^#\s+(.+)$/m);
     return { slug: f, title: titleMatch ? titleMatch[1].trim() : f, jlpt: data.jlpt, body };
   }));
-  points.sort((a, b) => (a.jlpt || '').localeCompare(b.jlpt || ''));
+  points.sort((a, b) => parseInt((b.jlpt||'N0').replace('N',''),10) - parseInt((a.jlpt||'N0').replace('N',''),10));
   state.grammarPoints = points;
   return points;
 }

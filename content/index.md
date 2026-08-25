@@ -53,6 +53,8 @@ Master list of content files (used by app.js and service-worker.js).
 - grammar/tsumori.md
 - grammar/wa-topic-particle.md
 - grammar/wo-object-particle.md
+- grammar/n5-grammar-batch1.md
+- grammar/n5-grammar-batch2.md
 - index.md
 - kanji/grade1/01-一.md
 - kanji/grade1/02-二.md

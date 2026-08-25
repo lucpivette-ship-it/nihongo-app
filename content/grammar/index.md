@@ -57,4 +57,7 @@ Core N5 grammar points plus a growing set of N4/N3 points, tagged by JLPT level,
 - [[ba-conditional|〜ば — conditional]] — #N3
 - [[keigo-sonkeigo-kenjougo|敬語 — honorific & humble speech]] — #N3
 
+- [[n5-grammar-batch1|N5 Batch 1 (20 points: cha/ja-ikenai through ni-suru)]] — #N5
+- [[n5-grammar-batch2|N5 Batch 2 (20 points: ni/e through yori~hou-ga)]] — #N5
+
 #grammar-index

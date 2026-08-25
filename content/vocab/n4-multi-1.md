@@ -84,6 +84,7 @@ tags: [vocab, daily-life]
 | おもちゃ | おもちゃ | toy | #N4 | 子供におもちゃを買った。*(I bought a toy for the child.)* |
 | 親 | おや | parent | #N4 | 親に電話をした。*(I called my parents.)* |
 | お礼 | おれい | thanks, gratitude | #N4 | お礼の手紙を書いた。*(I wrote a thank-you letter.)* |
+| 折る | おる | to fold, to break | #N4 | 紙を折って鶴を作った。*(I folded paper and made a crane.)* |
 | 折れる | おれる | to break, to bend | #N4 | 傘の骨が折れた。*(The umbrella's rib broke.)* |
 | カーテン | カーテン | curtain | #N4 | カーテンを閉めてください。*(Please close the curtains.)* |
 | 海岸 | かいがん | coast, seashore | #N4 | 海岸を散歩した。*(I walked along the seashore.)* |

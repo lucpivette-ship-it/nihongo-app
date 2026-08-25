@@ -2682,6 +2682,7 @@ Master list of content files (used by app.js and service-worker.js).
 - vocab/n2-tanos-3.md
 - vocab/n2-elzup-1.md
 - vocab/n2-elzup-2.md
+- vocab/n2-multi-1.md
 - vocab/n3-essentials.md
 - vocab/n3-essentials-2.md
 - vocab/n3-essentials-3.md
@@ -2692,8 +2693,13 @@ Master list of content files (used by app.js and service-worker.js).
 - vocab/n3-essentials-8.md
 - vocab/n3-essentials-9.md
 - vocab/n3-essentials-10.md
+- vocab/n3-multi-1.md
+- vocab/n3-multi-2.md
+- vocab/n3-multi-3.md
 - vocab/n4-essentials.md
 - vocab/n4-essentials-2.md
+- vocab/n4-multi-1.md
+- vocab/n5-multi-1.md
 - vocab/numbers-counting.md
 - vocab/other-essentials.md
 - vocab/places-directions.md

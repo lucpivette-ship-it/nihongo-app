@@ -32,7 +32,6 @@ tags: [vocab, daily-life]
 | 軟らかい | やわらかい | soft, tender, limp | #N2 | このパンは軟らかいです。 *(This bread is soft.)* |
 | 遊園地 | ゆうえんち | amusement park | #N2 | 家族で遊園地に行きました。 *(I went to the amusement park with my family.)* |
 | 夕刊 | ゆうかん | evening paper | #N2 | 夕刊を読みながら休みました。 *(I rested while reading the evening paper.)* |
-| 友好 | ゆうこう | friendship | #N2 | 両国は友好関係を築いています。 *(The two countries are building a friendly relationship.)* |
 | 郵送 | ゆうそう | mailing | #N2 | 書類を郵送しました。 *(I mailed the documents.)* |
 | 夕立 | ゆうだち | sudden evening shower | #N2 | 夕立に降られて濡れました。 *(I got caught in a sudden shower and got wet.)* |
 | 夕日 | ゆうひ | the evening sun, setting sun | #N2 | 海に沈む夕日を見ました。 *(I watched the sun setting into the sea.)* |

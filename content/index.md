@@ -2672,6 +2672,11 @@ Master list of content files (used by app.js and service-worker.js).
 - vocab/index.md
 - vocab/n2-essentials.md
 - vocab/n2-essentials-2.md
+- vocab/n2-essentials-3.md
+- vocab/n2-essentials-4.md
+- vocab/n2-essentials-5.md
+- vocab/n2-essentials-6.md
+- vocab/n2-essentials-7.md
 - vocab/n3-essentials.md
 - vocab/n3-essentials-2.md
 - vocab/n3-essentials-3.md
@@ -2698,6 +2703,8 @@ Master list of content files (used by app.js and service-worker.js).
 - vocab/verbs-actions-3.md
 - vocab/verbs-actions-n2.md
 - vocab/verbs-actions-n2-2.md
+- vocab/verbs-actions-n2-3.md
+- vocab/verbs-actions-n2-4.md
 - vocab/verbs-actions-n3.md
 - vocab/verbs-actions-n3-2.md
 - vocab/verbs-actions-n3-3.md

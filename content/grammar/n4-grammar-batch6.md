@@ -2,186 +2,186 @@
 tags: [grammar, N4]
 ---
 
-# Grammar — N4 Batch 4 (20 points)
+# Grammar — N4 Batch 6 (20 points)
 
-## noni [2] — to (do something); in order to
+## te yaru — to do for; to do a favor (casual)
 **JLPT:** N4
 
-Attaches to the dictionary form of a verb + のに to mark the purpose for which a tool, time, or method is used.
+A blunter, more casual version of てあげる, used toward people, animals, or plants the speaker considers below them in status.
 
-**JP:** この道具は野菜を切るのに便利です。
-**Reading:** Kono dougu wa yasai o kiru noni benri desu.
-**EN:** This tool is convenient for cutting vegetables.
+**JP:** 弟に宿題を手伝ってやった。
+**Reading:** Otouto ni shukudai o tetsudatte yatta.
+**EN:** I helped my little brother with his homework.
 
-## nowa~da — [A] is [B]; the reason for [A] is [B]
+## te yokatta — I'm glad that ~
 **JLPT:** N4
 
-Nominalizes a clause with の, then uses は to mark it as the topic, emphasizing the explanation that follows.
+Attaches to the て-form of a verb + よかった to express relief or gladness about something that happened.
 
-**JP:** 遅れたのは電車が止まったからです。
-**Reading:** Okureta no wa densha ga tomatta kara desu.
-**EN:** The reason I was late is that the train stopped.
+**JP:** 早く出発して良かったです。
+**Reading:** Hayaku shuppatsu shite yokatta desu.
+**EN:** I'm glad we left early.
 
-## o~kudasai — please do ~ (honorific)
+## teiru tokoro — in the process of doing
 **JLPT:** N4
 
-Attaches お + the ます-stem of a verb + ください to make a polite, formal request.
+Combines ている with ところ to emphasize being right in the middle of an ongoing action.
 
-**JP:** 少々お待ちください。
-**Reading:** Shoushou omachi kudasai.
-**EN:** Please wait a moment.
+**JP:** 今、レポートを書いているところです。
+**Reading:** Ima, repooto o kaite iru tokoro desu.
+**EN:** I'm in the middle of writing the report right now.
 
-## o~ni naru — to do (honorific)
+## temo — even; even if; even though
 **JLPT:** N4
 
-Attaches お + the ます-stem of a verb + になる to speak respectfully about someone else's action.
+Attaches to the て-form of a verb or adjective + も to describe a condition that doesn't change the outcome.
 
-**JP:** 先生はもうお帰りになりました。
-**Reading:** Sensei wa mou okaeri ni narimashita.
-**EN:** The teacher has already gone home (honorific).
+**JP:** 雨が降っても、行きます。
+**Reading:** Ame ga futtemo, ikimasu.
+**EN:** Even if it rains, I'll go.
 
-## oki ni — repeated at intervals, every ~
+## to — whenever [A] happens, [B] also happens
 **JLPT:** N4
 
-Attaches after a time or distance expression + おきに to mean "every other" or "at intervals of."
+Attaches to the plain form of a verb/adjective to describe a natural, automatic, or habitual result.
 
-**JP:** このバスは十分おきに来ます。
-**Reading:** Kono basu wa juppun oki ni kimasu.
-**EN:** This bus comes every ten minutes.
+**JP:** 春になると、桜が咲きます。
+**Reading:** Haru ni naru to, sakura ga sakimasu.
+**EN:** When spring comes, the cherry blossoms bloom.
 
-## owaru — to finish; to end
+## to ittemo ii — you could say; one might say; I'd say
 **JLPT:** N4
 
-Attaches to the ます-stem of a verb + 終わる to mark the completion of an action.
+Attaches to a plain-form clause + と言ってもいい to hedge a statement as a reasonable way of putting it.
 
-**JP:** 宿題をやり終わりました。
-**Reading:** Shukudai o yariowarimashita.
-**EN:** I finished doing my homework.
+**JP:** 彼はほとんど天才と言ってもいいです。
+**Reading:** Kare wa hotondo tensai to itte mo ii desu.
+**EN:** You could say he's practically a genius.
 
-## rareru — potential form
+## to iu — called; named; that ~
 **JLPT:** N4
 
-The potential conjugation of a verb, expressing ability or possibility (e.g. 食べられる from 食べる).
+Attaches after a name or quoted phrase to introduce or explain what something is called.
 
-**JP:** 朝早く起きられますか。
-**Reading:** Asa hayaku okiraremasu ka.
-**EN:** Can you wake up early in the morning?
+**JP:** 「さくら」という花が好きです。
+**Reading:** "Sakura" to iu hana ga suki desu.
+**EN:** I like the flower called "sakura."
 
-## rashii — it seems like; I heard; apparently
+## to iu koto — convert phrase into noun
 **JLPT:** N4
 
-Attaches to a plain-form clause to report secondhand information or a reasoned impression.
+Attaches to a clause + ということ to nominalize it, often summarizing or restating a fact.
 
-**JP:** 明日は台風が来るらしいです。
-**Reading:** Ashita wa taifuu ga kuru rashii desu.
-**EN:** It seems a typhoon is coming tomorrow.
+**JP:** 明日休みだということを知りませんでした。
+**Reading:** Ashita yasumi da to iu koto o shirimasen deshita.
+**EN:** I didn't know that tomorrow is a day off.
 
-## sa — -ness (nominalizer for adjectives)
+## to iwarete iru — it is said that
 **JLPT:** N4
 
-Attaches to the stem of an い-adjective or な-adjective to turn a quality into an abstract noun.
+Attaches to a plain-form clause + と言われている to describe a widely-held belief or reputation.
 
-**JP:** この山の高さはどのくらいですか。
-**Reading:** Kono yama no takasa wa dono kurai desu ka.
-**EN:** About how high is this mountain?
+**JP:** この温泉は体にいいと言われています。
+**Reading:** Kono onsen wa karada ni ii to iwarete imasu.
+**EN:** This hot spring is said to be good for your body.
 
-## sakki — some time ago; just now
+## to kiita — I heard...
 **JLPT:** N4
 
-A casual adverb referring to a moment slightly earlier in the same day/conversation.
+Attaches to a plain-form clause + と聞いた to report something the speaker heard from someone else.
 
-**JP:** さっき電話がありました。
-**Reading:** Sakki denwa ga arimashita.
-**EN:** There was a phone call just now.
+**JP:** 彼は結婚したと聞きました。
+**Reading:** Kare wa kekkon shita to kikimashita.
+**EN:** I heard that he got married.
 
-## saserareru — causative-passive
+## to omou — to think; I think; you think
 **JLPT:** N4
 
-Combines the causative and passive forms to express being made to do something against one's will.
+Attaches to a plain-form clause + と思う to express the speaker's opinion or thought.
 
-**JP:** 子供の頃、よく野菜を食べさせられました。
-**Reading:** Kodomo no koro, yoku yasai o tabesaseraremashita.
-**EN:** As a child, I was often made to eat vegetables.
+**JP:** 明日は雨が降ると思います。
+**Reading:** Ashita wa ame ga furu to omoimasu.
+**EN:** I think it will rain tomorrow.
 
-## saseru — causative form
+## toka~toka — among other things; such as; like
 **JLPT:** N4
 
-The causative conjugation, expressing making or letting someone do something.
+Lists examples casually and non-exhaustively, similar to や but more conversational.
 
-**JP:** 先生は学生に本を読ませました。
-**Reading:** Sensei wa gakusei ni hon o yomasemashita.
-**EN:** The teacher made the students read the book.
+**JP:** 週末は映画とか買い物とかをします。
+**Reading:** Shuumatsu wa eiga toka kaimono toka o shimasu.
+**EN:** On weekends I do things like watch movies or go shopping.
 
-## sasete kudasai — please let me do
+## tokoro — just about to; on the verge of doing
 **JLPT:** N4
 
-Combines the causative form with てください to politely ask for permission to do something oneself.
+Attaches to the dictionary form of a verb + ところ to describe an action about to begin.
 
-**JP:** 少し休ませてください。
-**Reading:** Sukoshi yasumasete kudasai.
-**EN:** Please let me rest a little.
+**JP:** 今から出かけるところです。
+**Reading:** Ima kara dekakeru tokoro desu.
+**EN:** I'm just about to head out now.
 
-## sasuga — as one would expect; even ~
+## tsuzukeru — continue to; keep on
 **JLPT:** N4
 
-Expresses admiration that someone or something lived up to a high expectation.
+Attaches to the ます-stem of a verb + 続ける to describe an action carried out continuously.
 
-**JP:** さすが先生ですね、何でも知っています。
-**Reading:** Sasuga sensei desu ne, nandemo shitte imasu.
-**EN:** As expected of a teacher — you know everything.
+**JP:** 彼は十年間、日本語を勉強し続けています。
+**Reading:** Kare wa juunenkan, nihongo o benkyou shitsuzukete imasu.
+**EN:** He has continued studying Japanese for ten years.
 
-## shi — and; and what's more (emphasis)
+## tte — named; called
 **JLPT:** N4
 
-Attaches to plain-form clauses to list reasons or qualities, adding emphasis that there are even more.
+A casual, spoken equivalent of という or と言う, and also used to quote or report what someone said.
 
-**JP:** この店は安いし、おいしいです。
-**Reading:** Kono mise wa yasui shi, oishii desu.
-**EN:** This shop is cheap, and what's more, delicious.
+**JP:** 田中さんって知っていますか。
+**Reading:** Tanaka san tte shitte imasu ka.
+**EN:** Do you know [someone called] Tanaka?
 
-## sonna ni — so much; so; like that
+## ukemi kei — passive form; passive voice
 **JLPT:** N4
 
-An adverb referring back to a degree or manner already mentioned or implied, often with negatives.
+The passive conjugation of a verb, describing an action done to the subject, often by someone else.
 
-**JP:** そんなに心配しないでください。
-**Reading:** Sonna ni shinpai shinaide kudasai.
-**EN:** Please don't worry so much.
+**JP:** 財布を盗まれました。
+**Reading:** Saifu o nusumaremashita.
+**EN:** My wallet was stolen (from me).
 
-## sore demo — but still; and yet; even so
+## wa~ga... wa — [A] but [B]; however; comparison
 **JLPT:** N4
 
-A conjunction acknowledging a preceding fact while asserting that it doesn't change the outcome.
+Uses は twice to contrast two related topics, highlighting a difference between them.
 
-**JP:** 大変でした。それでも最後までやりました。
-**Reading:** Taihen deshita. Sore demo saigo made yarimashita.
-**EN:** It was tough. Even so, I did it to the end.
+**JP:** 英語は話せますが、中国語は話せません。
+**Reading:** Eigo wa hanasemasu ga, chuugokugo wa hanasemasen.
+**EN:** I can speak English, but I can't speak Chinese.
 
-## sore ni — besides; in addition; also
+## yasui — easy to; likely to; prone to
 **JLPT:** N4
 
-A conjunction adding an extra point or reason on top of what was just said.
+Attaches to the ます-stem of a verb to describe something that's easy or likely to happen.
 
-**JP:** 雨が降っている。それに風も強い。
-**Reading:** Ame ga futte iru. Sore ni kaze mo tsuyoi.
-**EN:** It's raining. Besides, the wind is strong too.
+**JP:** この漢字は読みやすいです。
+**Reading:** Kono kanji wa yomiyasui desu.
+**EN:** This kanji is easy to read.
 
-## sou da [1] — I heard that; it is said that
+## yatto — at last; finally; barely; narrowly
 **JLPT:** N4
 
-Attaches to a plain-form clause to report information heard from another source (hearsay).
+An adverb expressing relief that something long-awaited finally happened.
 
-**JP:** 天気予報によると、明日は晴れるそうです。
-**Reading:** Tenki yohou ni yoru to, ashita wa hareru sou desu.
-**EN:** According to the weather forecast, I heard it'll be sunny tomorrow.
+**JP:** やっと宿題が終わりました。
+**Reading:** Yatto shukudai ga owarimashita.
+**EN:** I finally finished my homework.
 
-## sou da [2] — looks like; appears like; seeming
+## yori — than; rather than; more than
 **JLPT:** N4
 
-Attaches to the stem of an adjective or verb's ます-stem to describe a visual impression before confirmation.
+Marks the standard of comparison in a sentence, "compared to [A]."
 
-**JP:** このケーキはおいしそうです。
-**Reading:** Kono keeki wa oishisou desu.
-**EN:** This cake looks delicious.
+**JP:** 今日は昨日より寒いです。
+**Reading:** Kyou wa kinou yori samui desu.
+**EN:** Today is colder than yesterday.
 
 #grammar #N4

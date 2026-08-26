@@ -78,4 +78,15 @@ Core N5 grammar points plus a growing set of N4/N3 points, tagged by JLPT level,
 - [[n3-grammar-batch9|N3 Batch 9 (20 points: ue-de through zuni)]] — #N3
 - [[n3-grammar-batch10|N3 Batch 10 (2 points: zuni-wa-irarenai, zutsu)]] — #N3
 
+- [[n2-grammar-batch1|N2 Batch 1 (20 points: ageku through enai)]] — #N2
+- [[n2-grammar-batch2|N2 Batch 2 (20 points: eru/uru through ka to omottara)]] — #N2
+- [[n2-grammar-batch3|N2 Batch 3 (20 points: ka~nai ka no uchi ni through koto niwa naranai)]] — #N2
+- [[n2-grammar-batch4|N2 Batch 4 (20 points: kuse shite through naka o/naka dewa)]] — #N2
+- [[n2-grammar-batch5|N2 Batch 5 (20 points: naku wa nai through ni saishite)]] — #N2
+- [[n2-grammar-batch6|N2 Batch 6 (20 points: ni sakidachi through nu)]] — #N2
+- [[n2-grammar-batch7|N2 Batch 7 (20 points: nuki ni shite through shidai ni)]] — #N2
+- [[n2-grammar-batch8|N2 Batch 8 (20 points: shikamo through te tamaranai)]] — #N2
+- [[n2-grammar-batch9|N2 Batch 9 (20 points: te touzen da through toshitemo)]] — #N2
+- [[n2-grammar-batch10|N2 Batch 10 (17 points: tsutsu through zu ni sumu)]] — #N2
+
 #grammar-index

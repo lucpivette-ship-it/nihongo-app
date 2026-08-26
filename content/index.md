@@ -55,6 +55,13 @@ Master list of content files (used by app.js and service-worker.js).
 - grammar/wo-object-particle.md
 - grammar/n5-grammar-batch1.md
 - grammar/n5-grammar-batch2.md
+- grammar/n4-grammar-batch1.md
+- grammar/n4-grammar-batch2.md
+- grammar/n4-grammar-batch3.md
+- grammar/n4-grammar-batch4.md
+- grammar/n4-grammar-batch5.md
+- grammar/n4-grammar-batch6.md
+- grammar/n4-grammar-batch7.md
 - index.md
 - kanji/grade1/01-一.md
 - kanji/grade1/02-二.md

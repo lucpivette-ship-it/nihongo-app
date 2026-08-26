@@ -227,7 +227,7 @@ function renderHome() {
       <div class="tile-grid">
         <div class="tile" data-go="kanji"><span class="glyph">漢字</span><span class="label">Kanji</span><span class="sub">1,026 elementary + remaining jōyō in progress</span></div>
         <div class="tile" data-go="vocab"><span class="glyph">語彙</span><span class="label">Vocabulary</span><span class="sub">Daily life & business</span></div>
-        <div class="tile" data-go="grammar"><span class="glyph">文法</span><span class="label">Grammar</span><span class="sub">N5–N3 points</span></div>
+        <div class="tile" data-go="grammar"><span class="glyph">文法</span><span class="label">Grammar</span><span class="sub">N5–N1 · 852 pts</span></div>
         <div class="tile" data-go="readings"><span class="glyph">読解</span><span class="label">Readings</span><span class="sub">Short passages</span></div>
         <div class="tile" data-go="other"><span class="glyph">他</span><span class="label">Other</span><span class="sub">Roadmap & notes</span></div>
       </div>
@@ -685,12 +685,25 @@ function renderVocabWordDetail(catIdx, wordIdx) {
 // ---------- Grammar ----------
 
 function renderGrammarHome() {
-  pushView(async () => {
-    main.innerHTML = '<p>Loading…</p>';
-    const points = await loadGrammar();
-    main.innerHTML = points.map(p => `<div class="list-note" data-slug="${p.slug}"><div class="title">${p.title}</div>${jlptBadge(p.jlpt)}</div>`).join('');
-    main.querySelectorAll('[data-slug]').forEach(el => el.addEventListener('click', () => renderNoteBody('grammar', el.dataset.slug)));
-  }, 'Grammar', 'N5–N3 points');
+    pushView(async () => {
+          main.innerHTML = '<p>Loading…</p>';
+          const points = await loadGrammar();
+          const levels = ['N5', 'N4', 'N3', 'N2', 'N1'];
+          main.innerHTML = '<div class="section-title">By level</div>' + levels.map(l => {
+                const count = points.filter(p => (p.jlpt || 'N5') === l).length;
+                return `<div class="list-note" data-level="${l}"><div class="title">${l} Grammar ${jlptBadge(l)}</div><div class="group-meta">${count} points</div></div>`;
+          }).join('');
+          headerSub.textContent = points.length + ' points · N5–N1';
+          main.querySelectorAll('[data-level]').forEach(el => el.addEventListener('click', () => renderGrammarLevel(el.dataset.level)));
+    }, 'Grammar', 'N5–N1 points');
+}
+
+function renderGrammarLevel(level) {
+    const points = state.grammarPoints.filter(p => (p.jlpt || 'N5') === level);
+    pushView(() => {
+          main.innerHTML = points.map(p => `<div class="list-note" data-slug="${p.slug}"><div class="title">${p.title}</div>${jlptBadge(p.jlpt)}</div>`).join('');
+          main.querySelectorAll('[data-slug]').forEach(el => el.addEventListener('click', () => renderNoteBody('grammar', el.dataset.slug)));
+    }, level + ' Grammar', points.length + ' points');
 }
 
 // ---------- Readings ----------

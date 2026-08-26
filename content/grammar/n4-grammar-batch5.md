@@ -2,186 +2,186 @@
 tags: [grammar, N4]
 ---
 
-# Grammar — N4 Batch 4 (20 points)
+# Grammar — N4 Batch 5 (20 points)
 
-## noni [2] — to (do something); in order to
+## sou ni / sou na — seems like; looks like
 **JLPT:** N4
 
-Attaches to the dictionary form of a verb + のに to mark the purpose for which a tool, time, or method is used.
+The adverbial (そうに) and noun-modifying (そうな) forms of そうだ (appearance), used before a verb or noun respectively.
 
-**JP:** この道具は野菜を切るのに便利です。
-**Reading:** Kono dougu wa yasai o kiru noni benri desu.
-**EN:** This tool is convenient for cutting vegetables.
+**JP:** 楽しそうな顔をしていますね。
+**Reading:** Tanoshisou na kao o shite imasu ne.
+**EN:** You have a face that looks like you're having fun.
 
-## nowa~da — [A] is [B]; the reason for [A] is [B]
+## ta bakari — just finished; something just occurred
 **JLPT:** N4
 
-Nominalizes a clause with の, then uses は to mark it as the topic, emphasizing the explanation that follows.
+Attaches to the plain past form of a verb + ばかり to emphasize that an action was completed only moments ago.
 
-**JP:** 遅れたのは電車が止まったからです。
-**Reading:** Okureta no wa densha ga tomatta kara desu.
-**EN:** The reason I was late is that the train stopped.
+**JP:** 今、起きたばかりです。
+**Reading:** Ima, okita bakari desu.
+**EN:** I just woke up right now.
 
-## o~kudasai — please do ~ (honorific)
+## ta tokoro — just finished doing, was just doing
 **JLPT:** N4
 
-Attaches お + the ます-stem of a verb + ください to make a polite, formal request.
+Attaches to the plain past form of a verb + ところ to mark the exact moment an action was completed.
 
-**JP:** 少々お待ちください。
-**Reading:** Shoushou omachi kudasai.
-**EN:** Please wait a moment.
+**JP:** 駅に着いたところです。
+**Reading:** Eki ni tsuita tokoro desu.
+**EN:** I just arrived at the station.
 
-## o~ni naru — to do (honorific)
+## tadoushi & jidoushi — transitive & intransitive verbs
 **JLPT:** N4
 
-Attaches お + the ます-stem of a verb + になる to speak respectfully about someone else's action.
+Japanese verbs often come in transitive/intransitive pairs (他動詞 acts on an object with を; 自動詞 describes something happening on its own with が).
 
-**JP:** 先生はもうお帰りになりました。
-**Reading:** Sensei wa mou okaeri ni narimashita.
-**EN:** The teacher has already gone home (honorific).
+**JP:** ドアが開きました。／ドアを開けました。
+**Reading:** Doa ga akimashita. / Doa o akemashita.
+**EN:** The door opened (by itself). / I opened the door.
 
-## oki ni — repeated at intervals, every ~
+## tagaru — wants to do (third person)
 **JLPT:** N4
 
-Attaches after a time or distance expression + おきに to mean "every other" or "at intervals of."
+Attaches to the ます-stem of a verb + たがる to describe a third person's observed desire to do something.
 
-**JP:** このバスは十分おきに来ます。
-**Reading:** Kono basu wa juppun oki ni kimasu.
-**EN:** This bus comes every ten minutes.
+**JP:** 弟はゲームをしたがっています。
+**Reading:** Otouto wa geemu o shitagatte imasu.
+**EN:** My little brother wants to play games.
 
-## owaru — to finish; to end
+## tara dou — why don't you; how about ~
 **JLPT:** N4
 
-Attaches to the ます-stem of a verb + 終わる to mark the completion of an action.
+Attaches to the たら-form of a verb + どう to give friendly advice or a suggestion.
 
-**JP:** 宿題をやり終わりました。
-**Reading:** Shukudai o yariowarimashita.
-**EN:** I finished doing my homework.
+**JP:** 医者に相談したらどうですか。
+**Reading:** Isha ni soudan shitara dou desu ka.
+**EN:** Why don't you consult a doctor?
 
-## rareru — potential form
+## tara ii desu ka — what should I do?
 **JLPT:** N4
 
-The potential conjugation of a verb, expressing ability or possibility (e.g. 食べられる from 食べる).
+Attaches to the たら-form of a verb + いいですか to ask the listener for instructions or advice.
 
-**JP:** 朝早く起きられますか。
-**Reading:** Asa hayaku okiraremasu ka.
-**EN:** Can you wake up early in the morning?
+**JP:** どこに行ったらいいですか。
+**Reading:** Doko ni ittara ii desu ka.
+**EN:** Where should I go?
 
-## rashii — it seems like; I heard; apparently
+## te / de — conjunctive particle; so; because of [A], [B]
 **JLPT:** N4
 
-Attaches to a plain-form clause to report secondhand information or a reasoned impression.
+The て-form used to link two clauses in sequence or to show a causal relationship between them.
 
-**JP:** 明日は台風が来るらしいです。
-**Reading:** Ashita wa taifuu ga kuru rashii desu.
-**EN:** It seems a typhoon is coming tomorrow.
+**JP:** 熱があって、学校を休みました。
+**Reading:** Netsu ga atte, gakkou o yasumimashita.
+**EN:** I had a fever, so I stayed home from school.
 
-## sa — -ness (nominalizer for adjectives)
+## te ageru — to do for; to do a favor
 **JLPT:** N4
 
-Attaches to the stem of an い-adjective or な-adjective to turn a quality into an abstract noun.
+Attaches to the て-form of a verb + あげる to describe doing something as a favor for someone else.
 
-**JP:** この山の高さはどのくらいですか。
-**Reading:** Kono yama no takasa wa dono kurai desu ka.
-**EN:** About how high is this mountain?
+**JP:** 友達に本を貸してあげました。
+**Reading:** Tomodachi ni hon o kashite agemashita.
+**EN:** I lent my friend a book (as a favor).
 
-## sakki — some time ago; just now
+## te hoshii — I want you to; need you to
 **JLPT:** N4
 
-A casual adverb referring to a moment slightly earlier in the same day/conversation.
+Attaches to the て-form of a verb + ほしい to express what the speaker wants someone else to do.
 
-**JP:** さっき電話がありました。
-**Reading:** Sakki denwa ga arimashita.
-**EN:** There was a phone call just now.
+**JP:** もっと勉強してほしいです。
+**Reading:** Motto benkyou shite hoshii desu.
+**EN:** I want you to study more.
 
-## saserareru — causative-passive
+## te iku — to start; to continue; to go on
 **JLPT:** N4
 
-Combines the causative and passive forms to express being made to do something against one's will.
+Attaches to the て-form of a verb + いく to describe an action or change continuing away from the present, into the future.
 
-**JP:** 子供の頃、よく野菜を食べさせられました。
-**Reading:** Kodomo no koro, yoku yasai o tabesaseraremashita.
-**EN:** As a child, I was often made to eat vegetables.
+**JP:** これからも日本語を勉強していきます。
+**Reading:** Kore kara mo nihongo o benkyou shite ikimasu.
+**EN:** I will continue studying Japanese from now on.
 
-## saseru — causative form
+## te ita — was doing something (past continuous)
 **JLPT:** N4
 
-The causative conjugation, expressing making or letting someone do something.
+The past form of ている, describing an ongoing action or state at a point in the past.
 
-**JP:** 先生は学生に本を読ませました。
-**Reading:** Sensei wa gakusei ni hon o yomasemashita.
-**EN:** The teacher made the students read the book.
+**JP:** 昨日の夜、テレビを見ていました。
+**Reading:** Kinou no yoru, terebi o mite imashita.
+**EN:** I was watching TV last night.
 
-## sasete kudasai — please let me do
+## te itadakemasen ka — could you please ~
 **JLPT:** N4
 
-Combines the causative form with てください to politely ask for permission to do something oneself.
+A very polite request form, attaching to the て-form of a verb + いただけませんか.
 
-**JP:** 少し休ませてください。
-**Reading:** Sukoshi yasumasete kudasai.
-**EN:** Please let me rest a little.
+**JP:** 少し待っていただけませんか。
+**Reading:** Sukoshi matte itadakemasen ka.
+**EN:** Could you please wait a moment?
 
-## sasuga — as one would expect; even ~
+## te kureru — to do a favor; do something for someone
 **JLPT:** N4
 
-Expresses admiration that someone or something lived up to a high expectation.
+Attaches to the て-form of a verb + くれる to describe someone else doing something for the speaker (or the speaker's in-group).
 
-**JP:** さすが先生ですね、何でも知っています。
-**Reading:** Sasuga sensei desu ne, nandemo shitte imasu.
-**EN:** As expected of a teacher — you know everything.
+**JP:** 友達が手伝ってくれました。
+**Reading:** Tomodachi ga tetsudatte kuremashita.
+**EN:** My friend helped me out.
 
-## shi — and; and what's more (emphasis)
+## te kuru — to do and come back; to become; to continue
 **JLPT:** N4
 
-Attaches to plain-form clauses to list reasons or qualities, adding emphasis that there are even more.
+Attaches to the て-form of a verb + くる to describe an action bringing something toward the present, or a gradual change leading up to now.
 
-**JP:** この店は安いし、おいしいです。
-**Reading:** Kono mise wa yasui shi, oishii desu.
-**EN:** This shop is cheap, and what's more, delicious.
+**JP:** ちょっとコンビニへ行ってきます。
+**Reading:** Chotto konbini e itte kimasu.
+**EN:** I'll just go to the convenience store (and come back).
 
-## sonna ni — so much; so; like that
+## te miru — try doing
 **JLPT:** N4
 
-An adverb referring back to a degree or manner already mentioned or implied, often with negatives.
+Attaches to the て-form of a verb + みる to describe trying an action to see what happens.
 
-**JP:** そんなに心配しないでください。
-**Reading:** Sonna ni shinpai shinaide kudasai.
-**EN:** Please don't worry so much.
+**JP:** この料理を作ってみます。
+**Reading:** Kono ryouri o tsukutte mimasu.
+**EN:** I'll try making this dish.
 
-## sore demo — but still; and yet; even so
+## te morau — to get somebody to do something
 **JLPT:** N4
 
-A conjunction acknowledging a preceding fact while asserting that it doesn't change the outcome.
+Attaches to the て-form of a verb + もらう to describe receiving the benefit of someone else's action.
 
-**JP:** 大変でした。それでも最後までやりました。
-**Reading:** Taihen deshita. Sore demo saigo made yarimashita.
-**EN:** It was tough. Even so, I did it to the end.
+**JP:** 先生に文法を教えてもらいました。
+**Reading:** Sensei ni bunpou o oshiete moraimashita.
+**EN:** I had the teacher explain the grammar to me.
 
-## sore ni — besides; in addition; also
+## te oku — to do something in advance
 **JLPT:** N4
 
-A conjunction adding an extra point or reason on top of what was just said.
+Attaches to the て-form of a verb + おく to describe preparing something ahead of time.
 
-**JP:** 雨が降っている。それに風も強い。
-**Reading:** Ame ga futte iru. Sore ni kaze mo tsuyoi.
-**EN:** It's raining. Besides, the wind is strong too.
+**JP:** 明日の準備をしておきます。
+**Reading:** Ashita no junbi o shite okimasu.
+**EN:** I'll get tomorrow's preparations done in advance.
 
-## sou da [1] — I heard that; it is said that
+## te shimau / chau — to do by accident, to finish completely
 **JLPT:** N4
 
-Attaches to a plain-form clause to report information heard from another source (hearsay).
+Attaches to the て-form of a verb + しまう (casual: ちゃう) to express completing something fully, often with regret or unintentionally.
 
-**JP:** 天気予報によると、明日は晴れるそうです。
-**Reading:** Tenki yohou ni yoru to, ashita wa hareru sou desu.
-**EN:** According to the weather forecast, I heard it'll be sunny tomorrow.
+**JP:** 大事な本をなくしてしまいました。
+**Reading:** Daiji na hon o nakushite shimaimashita.
+**EN:** I ended up losing my important book.
 
-## sou da [2] — looks like; appears like; seeming
+## te sumimasen — I'm sorry for
 **JLPT:** N4
 
-Attaches to the stem of an adjective or verb's ます-stem to describe a visual impression before confirmation.
+Attaches to the て-form of a verb + すみません to apologize for a specific action.
 
-**JP:** このケーキはおいしそうです。
-**Reading:** Kono keeki wa oishisou desu.
-**EN:** This cake looks delicious.
+**JP:** 遅れてすみません。
+**Reading:** Okurete sumimasen.
+**EN:** I'm sorry for being late.
 
 #grammar #N4

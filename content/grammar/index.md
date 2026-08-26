@@ -59,5 +59,12 @@ Core N5 grammar points plus a growing set of N4/N3 points, tagged by JLPT level,
 
 - [[n5-grammar-batch1|N5 Batch 1 (20 points: cha/ja-ikenai through ni-suru)]] — #N5
 - [[n5-grammar-batch2|N5 Batch 2 (20 points: ni/e through yori~hou-ga)]] — #N5
+- [[n4-grammar-batch1|N4 Batch 1 (20 points: aida through hazu-ga-nai)]] — #N4
+- [[n4-grammar-batch2|N4 Batch 2 (20 points: hitsuyou-ga-aru through kyuu-ni)]] — #N4
+- [[n4-grammar-batch3|N4 Batch 3 (21 points: made-ni through noni-1)]] — #N4
+- [[n4-grammar-batch4|N4 Batch 4 (20 points: noni-2 through sou-da-2)]] — #N4
+- [[n4-grammar-batch5|N4 Batch 5 (20 points: sou-ni/sou-na through te-sumimasen)]] — #N4
+- [[n4-grammar-batch6|N4 Batch 6 (20 points: te-yaru through yori)]] — #N4
+- [[n4-grammar-batch7|N4 Batch 7 (9 points: yotei-da through zurai)]] — #N4
 
 #grammar-index

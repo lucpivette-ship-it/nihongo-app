@@ -72,6 +72,16 @@ Master list of content files (used by app.js and service-worker.js).
 - grammar/n3-grammar-batch8.md
 - grammar/n3-grammar-batch9.md
 - grammar/n3-grammar-batch10.md
+- grammar/n2-grammar-batch1.md
+- grammar/n2-grammar-batch2.md
+- grammar/n2-grammar-batch3.md
+- grammar/n2-grammar-batch4.md
+- grammar/n2-grammar-batch5.md
+- grammar/n2-grammar-batch6.md
+- grammar/n2-grammar-batch7.md
+- grammar/n2-grammar-batch8.md
+- grammar/n2-grammar-batch9.md
+- grammar/n2-grammar-batch10.md
 - index.md
 - kanji/grade1/01-一.md
 - kanji/grade1/02-二.md

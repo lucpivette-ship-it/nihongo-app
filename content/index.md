@@ -8,6 +8,7 @@ Master list of content files (used by app.js and service-worker.js).
 - vocab/n1-elzup-4.md
 - vocab/n1-elzup-5.md
 - vocab/n1-elzup-6.md
+- vocab/n1-elzup-7.md
 - grammar/ba-conditional.md
 - grammar/da-desu.md
 - grammar/dake.md

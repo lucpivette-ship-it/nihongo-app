@@ -226,7 +226,7 @@ function renderHome() {
       <p style="color:var(--muted);margin-top:0">Goal: JLPT N3 → N2 → N1</p>
       <div class="tile-grid">
         <div class="tile" data-go="kanji"><span class="glyph">漢字</span><span class="label">Kanji</span><span class="sub">1,026 elementary + remaining jōyō in progress</span></div>
-        <div class="tile" data-go="vocab"><span class="glyph">語彙</span><span class="label">Vocabulary</span><span class="sub">Daily life & business</span></div>
+        <div class="tile" data-go="vocab"><span class="glyph">語彙</span><span class="label">Vocabulary</span><span class="sub">N5–N1 · 6,079 words</span></div>
         <div class="tile" data-go="grammar"><span class="glyph">文法</span><span class="label">Grammar</span><span class="sub">N5–N1 · 852 pts</span></div>
         <div class="tile" data-go="readings"><span class="glyph">読解</span><span class="label">Readings</span><span class="sub">Short passages</span></div>
         <div class="tile" data-go="other"><span class="glyph">他</span><span class="label">Other</span><span class="sub">Roadmap & notes</span></div>
@@ -581,16 +581,52 @@ function renderKanjiDetail(grade, kanjiChar) {
 // ---------- Vocabulary ----------
 
 function renderVocabHome() {
-  pushView(async () => {
-    main.innerHTML = '<p>Loading…</p>';
-    const cats = await loadVocab();
-    const total = cats.reduce((sum, c) => sum + c.words.length, 0);
-    main.innerHTML = `<p style="color:var(--muted);margin-top:0">${total} words in this batch (pilot toward a 2,000–3,000 word target)</p>` +
-      cats.map(c => `<div class="list-note" data-slug="${c.slug}"><div class="title">${c.title}</div><div class="group-meta">${c.words.length} words</div></div>`).join('');
-    main.querySelectorAll('[data-slug]').forEach(el => {
-      el.addEventListener('click', () => renderVocabCategory(el.dataset.slug));
+    pushView(async () => {
+          main.innerHTML = '<p>Loading…</p>';
+          const cats = await loadVocab();
+          const levels = ['N5', 'N4', 'N3', 'N2', 'N1'];
+          const total = cats.reduce((sum, c) => sum + c.words.length, 0);
+          main.innerHTML = '<div class="section-title">By level</div>' + levels.map(l => {
+                let count = 0;
+                cats.forEach(c => c.words.forEach(w => { if ((w.jlpt || 'N5') === l) count++; }));
+                return `<div class="list-note" data-level="${l}"><div class="title">${l} Vocabulary ${jlptBadge(l)}</div><div class="group-meta">${count} words</div></div>`;
+          }).join('');
+          headerSub.textContent = total + ' words · N5–N1';
+          main.querySelectorAll('[data-level]').forEach(el => el.addEventListener('click', () => renderVocabLevel(el.dataset.level)));
+    }, 'Vocabulary', 'N5–N1 words');
+}
+
+function renderVocabLevel(level) {
+    const entries = [];
+    state.vocabCategories.forEach((cat, catIdx) => {
+          cat.words.forEach((w, wordIdx) => {
+                if ((w.jlpt || 'N5') === level) entries.push({ catIdx, wordIdx, w });
+          });
     });
-  }, 'Vocabulary', 'Daily life & business');
+    pushView(() => {
+          main.innerHTML = entries.map(({ catIdx, wordIdx, w }) => {
+                const ex = splitExample(w.example || '');
+                return `
+                <div class="card vocab-word-card" data-cat-idx="${catIdx}" data-word-idx="${wordIdx}">
+                  <div style="display:flex;justify-content:space-between;align-items:center">
+                    <div><strong style="font-size:18px">${w.term}</strong> <span style="color:var(--muted)">${w.reading}</span> ${jlptBadge(w.jlpt)}</div>
+                    ${TTS.buttons(w.term)}
+                  </div>
+                  <div>${w.meaning}</div>
+                  <div class="sentence-block" style="margin-top:8px">
+                    <div class="jp">${ex.jp} ${TTS.buttons(ex.jp)}</div>
+                    ${ex.en ? `<div class="en">${ex.en}</div>` : ''}
+                  </div>
+                </div>
+              `;
+          }).join('');
+          main.querySelectorAll('.vocab-word-card').forEach(el => {
+                el.addEventListener('click', (e) => {
+                      if (e.target.closest('.speak-btn')) return;
+                      renderVocabWordDetail(Number(el.dataset.catIdx), Number(el.dataset.wordIdx));
+                });
+          });
+    }, level + ' Vocabulary', entries.length + ' words');
 }
 
 function splitExample(example) {
